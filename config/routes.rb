@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :admins
-  devise_for :users
+  #生成したコントローラーがどこに存在するかを記述,不要なルーティングを削除
+  devise_for :admins, skip: [:registrations, :passwords] ,controllers: {
+  sessions: "admin/sessions"
+  }
+  devise_for :users, skip: [:passwords], controllers: {
+    registrations: "public/registrations",
+    sessions: 'public/sessions'
+  }
   #管理者側
   namespace :admins do
     #会員情報
