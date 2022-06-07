@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  
   #生成したコントローラーがどこに存在するかを記述, 不要なルーティングを削除
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }
+  
+  #トップ
+  root to: 'homes#top'
   #管理者側
   namespace :admin do
     #会員情報
@@ -16,9 +19,6 @@ Rails.application.routes.draw do
 
   #ユーザー側
   namespace :public do
-    #トップ
-    root to: 'homes#top'
-    get "home/about" => 'homes#about'
     #ログインユーザー情報
     resources :users , only: [:show, :edit, :update]
     get "users/:id/show_withdraw" => 'customers#show_withdraw'
@@ -34,6 +34,8 @@ Rails.application.routes.draw do
     get "/groups" => 'groups#join'
   end
 
+  
+  get "home/about" => 'homes#about'
   #検索
   get "search" => 'searches#search'
 

@@ -11,6 +11,26 @@
   </head>
 
   <body>
+    <header>
+      <% if admin_signed_in? %>
+        <%= link_to admin_users_path do %>
+        <h1>ふらっと</h1>
+        <% end %>
+      <ul class="navbar-nav ml-auto">
+        <li>
+          <%= link_to "会員一覧", admin_users_path %>
+        </li>
+        <li>
+          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+        </li>
+      <% end %>
+      </ul>
+    </header>
+    <main>
     <%= yield %>
+    </main>
+    <footer>
+      
+    </footer>
   </body>
 </html>
