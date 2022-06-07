@@ -4,7 +4,7 @@
   <div class = "row">
     <div class = "col-md-2">
       <%= form_with model: @new_post, local: true do |f| %>
-      <h4>募集する</h4>
+      <h4>投稿する</h4>
       <div class = form-group>
         <label for="post_title">投稿画像</label>
         <%= f.file_field :post, accept: "image/*", class: "form-control post" %>
@@ -34,7 +34,6 @@
           <p>タイトル：<%= post.title %></p>
           <p>説明：<%= post.body %></p>
           <p>ユーザーネーム：<%= post.user.name %></p>
-          <p><%= link_to "#{post.post_comments.count} コメント", public_post_path(post.id) %></p>
         </div>
       <% end %>
     </div>
