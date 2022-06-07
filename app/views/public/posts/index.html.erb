@@ -1,2 +1,41 @@
 <h1>Public::Posts#index</h1>
-<p>Find me in app/views/public/posts/index.html.erb</p>
+
+<div class="container">
+  <div class = "row">
+    <div class = "col-md-2">
+      <%= form_with model: @new_post, local: true do |f| %>
+      <h4>募集する</h4>
+      <div class = form-group>
+        <label for="post_title">投稿画像</label>
+        <%= f.file_field :post, accept: "image/*", class: "form-control post" %>
+      </div>
+      <div class = form-group>
+        <label for="post_title">タイトル</label>
+        <%= f.text_field :title, class: "form-control post_title" %>
+      </div>
+      <div class = form-group>
+        <label for="post_body">詳細</label>
+        <%= f.text_area :body, class: "form-control post_body" %>
+      </div>
+      <div class = form-group>
+        <%= f.submit '投稿する', class: "btn btn-sm btn-success" %>
+      </div>
+      <% end %>
+    </div>
+
+    <div class = "col-md-10">
+      <h2>投稿一覧</h2>
+      <% @posts.each do |post| %>
+        <div>
+          <%= link_to public_post_path(post.id) do %>
+            <%= image_tag post.get_post_image %>
+          <% end %>
+          <p>投稿ユーザー画像：<%= image_tag post.user.get_profile_image(100,100) %></p>
+          <p>タイトル：<%= post.title %></p>
+          <p>説明：<%= post.body %></p>
+          <p>ユーザーネーム：<%= post.user.name %></p>
+          <p><%= link_to "#{post.post_comments.count} コメント", public_post_path(post.id) %></p>
+        </div>
+      <% end %>
+    </div>
+</div>
