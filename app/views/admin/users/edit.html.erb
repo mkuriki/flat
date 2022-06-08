@@ -1,1 +1,46 @@
-edit page
+<% if @user.errors.any? %>
+  <%= @user.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+<%= form_with model: [:admin, @user] do |f| %>
+  <div class = "container">
+    <div class = "col-sm-6 mx-auto">
+      
+      <h4 class = "text-center mb-3"><%= @user.name %>さんの会員情報編集</h4>
+      <div class = "row mb-2">
+            <label class = "col-sm-4">会員id</label>
+            <%= @user.id %>
+      </div>
+      <div class = "row mb-2">
+        <label class = "col-sm-4">氏名</label>
+        <div class = "form-inline col-sm-8 px-0">
+         <%= f.text_field :last_name, class: "form-control col-sm-5 col-md-offset-5" %>
+         <%= f.text_field :first_name, class: "form-control col-sm-5 col-md-offset-5 ml-2" %>        
+        </div>
+      </div>
+      <div class="row mb-2">
+        <label class = "col-sm-4">メールアドレス</label>
+        <%= f.email_field :email, class: "form-control col-sm-8 col-md-offset-5" %>
+      </div>
+      <div class="row mb-2">
+        <label class = "col-sm-4">会員ステータス</label>
+          <div class="form-check mx-auto">
+            <%= f.radio_button :is_deleted, :true %>
+            <%= f.label :is_deleted, "退会" %>
+          </div>
+          <div class="form-check mx-auto">
+            <%= f.radio_button :is_deleted, :false %>
+            <%= f.label :is_deleted, "有効" %>
+          </div>
+      </div>
+      <div class = "text-center">
+      <%= f.submit "編集内容を保存する", class: "btn btn-outline-primary mt-3 p-3" %>
+      </div>
+    </div>
+  </div>
+
+<% end %>
