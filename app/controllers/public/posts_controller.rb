@@ -1,20 +1,25 @@
 class Public::PostsController < ApplicationController
+  
+  def create
+    @post = Post.new(post_params)
+    @post.user_id = current_user.id
+    
+    if @post.save
+      redirect_to public_post_path(@post.id)
+      flash[:notice] = "You have created book successfully."
+    else
+      @posts = Post.all
+      render :index
+    end
+  end
+  
   def index
     @post = Post.new
     @posts = Post.all
   end
   
-  def create
-    @new_post = Post.new(post_params)
-    @new_post.user_id = current_user.id
-    if @new_post.save
-      redirect_to public_post_path
-    else
-      render :new
-    end
-  end
-
   def show
+    @post = Post.find(params[:id])
   end
 
   def edit
@@ -30,6 +35,6 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:post_image, :title, :body)
+    params.require(:post).permit(:title, :body)
   end
 end

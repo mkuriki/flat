@@ -1,39 +1,34 @@
-<h1>Public::Posts#index</h1>
-
 <div class="container">
   <div class = "row">
-    <div class = "col-md-2">
-      <%= form_with model: @new_post, local: true do |f| %>
-      <h4>投稿する</h4>
-      <div class = form-group>
-        <label for="post_title">投稿画像</label>
-        <%= f.file_field :post, accept: "image/*", class: "form-control post" %>
-      </div>
-      <div class = form-group>
-        <label for="post_title">タイトル</label>
-        <%= f.text_field :title, class: "form-control post_title" %>
-      </div>
-      <div class = form-group>
-        <label for="post_body">詳細</label>
-        <%= f.text_area :body, class: "form-control post_body" %>
-      </div>
-      <div class = form-group>
-        <%= f.submit '投稿する', class: "btn btn-sm btn-success" %>
-      </div>
+    <div class = "col-md-3">
+      <%= form_with model:[:public, @post], local: true do |f| %>
+        <h4>投稿する</h4>
+        <%= f.file_field :post_image, accept: "image/*" %>
+        <div class = form-group>
+          <label for="post_title">タイトル</label>
+          <%= f.text_field :title, class: "form-control post_title" %>
+        </div>
+        <div class = form-group>
+          <label for="post_body">詳細</label>
+          <%= f.text_area :body, class: "form-control post_body" %>
+        </div>
+        <div class = form-group>
+          <%= f.submit '投稿する', class: "btn btn-sm btn-success" %>
+        </div>
       <% end %>
     </div>
 
-    <div class = "col-md-10">
+    <div class = "col-md-9">
       <h2>投稿一覧</h2>
-      <% @posts.each do |post| %>
+      <% @posts.each do |onepost| %>
         <div>
-          <%= link_to public_post_path(post.id) do %>
-            <%= image_tag post.get_post_image %>
+          <%= link_to public_post_path(onepost.id) do %>
+            <%= image_tag onepost.get_post_image(200, 200) %>
           <% end %>
-          <p>投稿ユーザー画像：<%= image_tag post.user.get_profile_image(100,100) %></p>
-          <p>タイトル：<%= post.title %></p>
-          <p>説明：<%= post.body %></p>
-          <p>ユーザーネーム：<%= post.user.name %></p>
+          <p>投稿ユーザー画像：<%= image_tag onepost.user.get_profile_image(100, 100) %></p>
+          <p>タイトル：<%= onepost.title %></p>
+          <p>説明：<%= onepost.body %></p>
+          <p>ユーザーネーム：<%= onepost.user.name %></p>
         </div>
       <% end %>
     </div>

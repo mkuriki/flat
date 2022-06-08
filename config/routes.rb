@@ -21,8 +21,8 @@ Rails.application.routes.draw do
   namespace :public do
     #ログインユーザー情報
     resources :users , only: [:show, :edit, :update]
-    get "users/:id/show_withdraw" => 'customers#show_withdraw'
-    patch "users/:id/show_withdraw" => 'customers#withdraw'
+    get "users/:id/show_withdraw" => 'users#show_withdraw'
+    patch "users/:id/show_withdraw" => 'users#withdraw'
     #投稿
     resources :posts
     #いいね機能
