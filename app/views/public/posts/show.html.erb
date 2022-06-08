@@ -10,6 +10,10 @@
       <%= link_to "編集", edit_public_post_path(@post), class: "btn btn-sm btn-success edit_post" %>
       <%= link_to "削除", public_post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger destroy_post" %>
     <% end %>
+    
+    <% if admin_signed_in? %>
+    <%= link_to "削除", public_post_path(@post), method: :delete, "data-confirm" => "削除しますか？", class: "btn btn-sm btn-danger destroy_post"  %>
+    <% end %>
   </div>
 </div>
 
