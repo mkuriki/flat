@@ -1,2 +1,23 @@
-<h1>Public::Users#show</h1>
-<p>Find me in app/views/public/users/show.html.erb</p>
+<div class = "container">
+  <div class = "row">
+    <div class = "col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h2>マイページ</h2>
+      <%= image_tag @user.get_profile_image(100,100) %>
+      <table class="table">
+          <tbody>
+            <tr>
+              <th>name</th>
+              <th><%= @user.name %></th>
+            </tr>
+            <tr>
+              <th>introduction</th>
+              <th><%= @user.introduction %></th>
+            </tr>
+          </tbody>
+      </table>
+      <%= link_to edit_public_user_path(@user), class: "btn btn-outline-secondary btn-lg" do %>
+      <i class="fas fa-user-cog"></i>　編集
+      <% end %>
+    </div>
+  </div>
+</div>

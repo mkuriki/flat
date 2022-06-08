@@ -14,6 +14,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       ## Rememberable
       t.datetime :remember_created_at
       t.string "name"
+      t.text "introduction"
       t.string "last_name"
       t.string "first_name"
       t.string "last_name_kana"

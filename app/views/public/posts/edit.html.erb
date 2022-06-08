@@ -1,2 +1,24 @@
-<h1>Public::Posts#edit</h1>
-<p>Find me in app/views/public/posts/edit.html.erb</p>
+<p id = notice></p>
+<div class = container>
+    <div class = row>
+        <div class = "col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+            <h1>投稿編集</h1>
+            <%= form_with model: @post,url: public_post_path do |f| %>
+              <div class="form-group">
+              <label for="post_title">タイトル</label>
+              <%= f.text_field :title, autofocus: true, placeholder: @post.title, class: "form-control post_title" %>
+              </div>
+              <div class = "form-group">
+              <label for="post_opinion">詳細</label>
+              <%= f.text_area :body, autofocus: true, class: "form-control post_body" %>
+              </div>
+              <div class = "form-group">
+              <%= f.submit "Update post", class: "btn btn-success"  %>
+              </div>
+              <%= link_to "Show", public_post_path(@post) %>
+              <%= "|" %>
+              <%= link_to "Back", public_posts_path %>
+            <% end %>
+        </div>
+    </div>
+</d
