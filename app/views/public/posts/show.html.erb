@@ -5,6 +5,7 @@
     <p>説明：<%= @post.body %></p>
     <p>投稿ユーザー画像：<%= image_tag @post.user.get_profile_image(100,100) %></p>
     <p>ユーザーネーム：<%= @post.user.name %></p>
+    <p class="comments_count">コメント数: <%= @post.post_comments.count %></p>
     <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
     <% if @post.user == current_user %>
       <%= link_to "編集", edit_public_post_path(@post), class: "btn btn-sm btn-success edit_post" %>
@@ -15,10 +16,12 @@
     <%= link_to "削除", public_post_path(@post), method: :delete, "data-confirm" => "削除しますか？", class: "btn btn-sm btn-danger destroy_post"  %>
     <% end %>
     
-    <div class="post_comments">
+    <div class="comments_index">
       <%= render 'public/post_comments/index', post: @post, post_comment: @post_comment %>
     </div>
-    <%= render 'public/post_comments/form', post: @post, post_comment: @post_comment %>
+    <div class="comments_form">
+      <%= render 'public/post_comments/form', post: @post, post_comment: @post_comment %>
+    </div>
   </div>
 </div>
 
