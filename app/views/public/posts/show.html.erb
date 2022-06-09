@@ -14,6 +14,11 @@
     <% if admin_signed_in? %>
     <%= link_to "削除", public_post_path(@post), method: :delete, "data-confirm" => "削除しますか？", class: "btn btn-sm btn-danger destroy_post"  %>
     <% end %>
+    
+    <div class="post_comments">
+      <%= render 'public/post_comments/index', post: @post, post_comment: @post_comment %>
+    </div>
+    <%= render 'public/post_comments/form', post: @post, post_comment: @post_comment %>
   </div>
 </div>
 

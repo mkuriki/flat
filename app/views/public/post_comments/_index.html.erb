@@ -1,0 +1,20 @@
+<table>
+  <tbody>
+      <% post.post_comments.each do |post_comment| %>
+      <tr>
+        <td>
+          <%= link_to public_user_path(post_comment.user) do %>
+            <%= image_tag post_comment.user.get_profile_image(100,100) %><br>
+            <%= post_comment.user.name %>
+          <% end %>
+        </td>
+        <td><%= post_comment.comment %></td>
+        <td>
+          <% if post_comment.user == current_user || admin_signed_in? %>
+            <%= link_to "Destroy", public_post_post_comment_path(post, post_comment), method: :delete, class: "btn btn-danger pull-right" %>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+  </tbody>
+</table>
