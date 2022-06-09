@@ -1,0 +1,13 @@
+<% if post.favorited_by?(current_user) %>
+<!--一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ-->
+  <%= link_to public_post_favorites_path(post), method: :delete, remote: true do %>
+    <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
+    <%= post.favorites.count %> いいね
+  <% end %>
+<!--一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ-->
+<% else %>
+  <%= link_to public_post_favorites_path(post), method: :post, remote: true do %>
+    <i class="fas fa-heart" aria-hidden="true"></i>
+    <%= post.favorites.count %> いいね
+  <% end %>
+<% end %>

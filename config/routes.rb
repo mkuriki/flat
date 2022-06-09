@@ -24,11 +24,12 @@ Rails.application.routes.draw do
     get "users/:id/show_withdraw" => 'users#show_withdraw'
     patch "users/:id/show_withdraw" => 'users#withdraw'
     #投稿
-    resources :posts
-    #いいね機能
-    resources :favorites, only: [:create, :destroy]
+    resources :posts do
+      #いいね機能
+      resource :favorites, only: [:create, :destroy]
+      resources :post_comments, only: [:create, :destroy]
+    end
     #コメント機能
-    resources :post_comments, only: [:create, :destroy]
     #グループ機能
     resources :groups
     get "/groups" => 'groups#join'

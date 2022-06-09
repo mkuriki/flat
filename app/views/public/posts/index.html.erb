@@ -20,15 +20,16 @@
 
     <div class = "col-md-9">
       <h2>投稿一覧</h2>
-      <% @posts.each do |onepost| %>
+      <% @posts.each do |post| %>
         <div>
-          <%= link_to public_post_path(onepost.id) do %>
-            <%= image_tag onepost.get_post_image(200,200) %>
+          <%= link_to public_post_path(post.id) do %>
+            <%= image_tag post.get_post_image(200,200) %>
           <% end %>
-          <p>投稿ユーザー画像：<%= image_tag onepost.user.get_profile_image(100,100) %></p>
-          <p>タイトル：<%= link_to onepost.title, public_post_path(onepost.id)  %></p>
-          <p>説明：<%= onepost.body %></p>
-          <p>ユーザーネーム：<%= onepost.user.name %></p>
+          <p>投稿ユーザー画像：<%= image_tag post.user.get_profile_image(100,100) %></p>
+          <p>タイトル：<%= link_to post.title, public_post_path(post)  %></p>
+          <p><%= render "public/favorites/fav", post: post %></p>
+          <p>説明：<%= post.body %></p>
+          <p>ユーザーネーム：<%= post.user.name %></p>
         </div>
       <% end %>
     </div>
