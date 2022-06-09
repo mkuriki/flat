@@ -16,8 +16,32 @@
           </tbody>
       </table>
       <%= link_to edit_public_user_path(@user), class: "btn btn-outline-secondary btn-lg" do %>
-      <i class="fas fa-user-cog"></i>　編集
+        <i class="fas fa-user-cog"></i>　編集
       <% end %>
+      
+      <table>
+        <h3>マイリスト</h3>
+        <thead>
+          <tr>
+            <th>投稿者名</th>
+            <th>タイトル</th>
+            <th>本文</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @favorites.each do |favorite| %>
+            <tr>
+              <td><%= favorite.post.user.name %></td>
+              <td>
+                <%= link_to public_post_path(favorite.post) do %>
+                  <%= favorite.post.title %>
+                <% end %>
+              </td>
+              <td><%= favorite.post.body %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>    
     </div>
   </div>
 </div>
