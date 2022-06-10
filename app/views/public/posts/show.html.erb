@@ -3,17 +3,14 @@
     <%= image_tag @post.get_post_image(200,200) %>
     <p>タイトル：<%= @post.title %></p>
     <p>説明：<%= @post.body %></p>
-    <p>投稿ユーザー画像：<%= image_tag @post.user.get_profile_image(100,100) %></p>
+    <p>投稿ユーザー画像：<%= link_to image_tag(@post.user.get_profile_image(100,100)), public_user_path(@post.user) %></p>
     <p>ユーザーネーム：<%= @post.user.name %></p>
     <p class="comments_count">コメント数: <%= @post.post_comments.count %></p>
     <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
-    <% if @post.user == current_user %>
-      <%= link_to "編集", edit_public_post_path(@post), class: "btn btn-sm btn-success edit_post" %>
-      <%= link_to "削除", public_post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger destroy_post" %>
-    <% end %>
     
-    <% if admin_signed_in? %>
-    <%= link_to "削除", public_post_path(@post), method: :delete, "data-confirm" => "削除しますか？", class: "btn btn-sm btn-danger destroy_post"  %>
+    <% if @post.user == current_user || admin_signed_in? %>
+      <%= link_to "編集", edit_public_post_path(@post), class: "btn btn-sm btn-success edit_post" %>
+      <%= link_to "削除", public_post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger destroy_post"  %>
     <% end %>
     
     <div class="comments_index">

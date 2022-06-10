@@ -12,7 +12,7 @@
           <%= link_to public_post_path(post.id) do %>
             <%= image_tag post.get_post_image(200,200) %>
           <% end %>
-          <p>投稿ユーザー画像：<%= image_tag post.user.get_profile_image(100,100) %></p>
+          <p>投稿ユーザー画像：<%= link_to image_tag(post.user.get_profile_image(100,100)), public_user_path(post.user) %></p>
           <p>タイトル：<%= link_to post.title, public_post_path(post)  %></p>
           <p id="fav_<%= post.id %>"><%= render "public/favorites/fav", post: post %></p>
           <p>説明：<%= post.body %></p>

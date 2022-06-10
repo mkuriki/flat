@@ -1,5 +1,7 @@
 class Public::UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:show, :update, :edit]
+  before_action :correct_user, only: [:withdraw, :edit, :update]
+  
   
   def show
     @user = User.find(params[:id])
@@ -32,7 +34,14 @@ class Public::UsersController < ApplicationController
   
   private
   
+  # ユーザーデータのストロングパラメータ
   def user_params
     params.require(:user).permit(:name, :introduction, :profile_image)
   end
+  # 特定のユーザーとログインユーザーの一致を確認
+  def correct_user
+  @user = User.find(params[:id])
+  redirect_to(public_user_path(current_user)) unless @user == current_user
+  end
+  
 end
