@@ -1,0 +1,17 @@
+<div class="container">
+  <div class = "row">
+    <div>
+      <h2>投稿一覧</h2>
+      <% @posts.each do |post| %>
+        <div>
+          <%= link_to admin_post_path(post) do %>
+            <%= image_tag post.get_post_image(200,200) %>
+          <% end %>
+          <p>投稿ユーザー画像：<%= link_to image_tag(post.user.get_profile_image(100,100)), admin_user_path(post.user) %></p>
+          <p>タイトル：<%= link_to post.title, admin_post_path(post)  %></p>
+          <p>説明：<%= post.body %></p>
+          <p>ユーザーネーム：<%= post.user.name %></p>
+        </div>
+      <% end %>
+    </div>
+</div>

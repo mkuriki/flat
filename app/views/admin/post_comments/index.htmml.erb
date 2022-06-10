@@ -1,0 +1,23 @@
+  <table>
+    <h4>マイリスト</h4>
+    <thead>
+      <tr>
+        <th>投稿者名</th>
+        <th>タイトル</th>
+        <th>本文</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @post_comments.each do |comment| %>
+        <tr>
+          <td><%= comment.post.user.name %></td>
+          <td>
+            <%= link_to admin_post_path(comment.post) do %>
+              <%= comment.post.title %>
+            <% end %>
+          </td>
+          <td><%= comment.post.body %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>

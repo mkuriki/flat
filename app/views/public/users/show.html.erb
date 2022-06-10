@@ -16,8 +16,8 @@
           </tbody>
       </table>
       
-      <!--特定のユーザーと管理者のみ閲覧可能-->
-      <% if @user == current_user || admin_signed_in? %>
+      <!--ログインユーザーのみ閲覧可能-->
+      <% if @user == current_user %>
       <%= link_to edit_public_user_path(@user), class: "btn btn-outline-secondary btn-lg" do %>
         <i class="fas fa-user-cog"></i>　編集
       <% end %>

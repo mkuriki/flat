@@ -1,6 +1,5 @@
-<!--ユーザーがサインイン、もしくは管理者の場合のみ表示-->
-<% if user_signed_in? || admin_signed_in? %>
-
+<!--ユーザーがサインインしている場合のみ表示-->
+<% if user_signed_in? %>
 <% if post.favorited_by?(current_user) %>
 <!--一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ-->
   <%= link_to public_post_favorites_path(post), method: :delete, remote: true do %>
@@ -14,5 +13,4 @@
     <%= post.favorites.count %> いいね
   <% end %>
 <% end %>
-
 <% end %>

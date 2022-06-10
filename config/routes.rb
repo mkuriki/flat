@@ -15,6 +15,16 @@ Rails.application.routes.draw do
   namespace :admin do
     #会員情報
     resources :users
+    #投稿
+    resources :posts do
+    #コメント機能
+    resources :post_comments, only: [:create, :destroy]
+    end
+     #グループ機能
+    resources :groups do
+      resource :group_users, only: [:create, :destroy]
+    end
+    
   end
 
   #ユーザー側
@@ -27,9 +37,9 @@ Rails.application.routes.draw do
     resources :posts do
       #いいね機能
       resource :favorites, only: [:create, :destroy]
+      #コメント機能
       resources :post_comments, only: [:create, :destroy]
     end
-    #コメント機能
     #グループ機能
     resources :groups do
       resource :group_users, only: [:create, :destroy]

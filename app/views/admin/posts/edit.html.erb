@@ -11,7 +11,7 @@
                   <% end %>
                   </ul>
               <% end %>             
-              <%= form_with model: @post,url: public_post_path do |f| %>
+              <%= form_with model: @post,url: admin_post_path do |f| %>
               <div class="form-group">
               <label for="post_title">タイトル</label>
               <%= f.text_field :title, autofocus: true, placeholder: @post.title, class: "form-control post_title" %>
@@ -23,9 +23,9 @@
               <div class = "form-group">
               <%= f.submit "Update post", class: "btn btn-success"  %>
               </div>
-              <%= link_to "戻る", public_post_path(@post) %>
+              <%= link_to "戻る", admin_post_path(@post) %>
               <%= "|" %>
-              <%= link_to "投稿一覧へ", public_posts_path %>
+              <%= link_to "投稿一覧へ", admin_posts_path %>
             <% end %>
         </div>
     </div>
