@@ -31,8 +31,9 @@ Rails.application.routes.draw do
     end
     #コメント機能
     #グループ機能
-    resources :groups
-    get "/groups" => 'groups#join'
+    resources :groups do
+      resource :group_users, only: [:create, :destroy]
+    end
   end
 
   

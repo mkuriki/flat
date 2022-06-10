@@ -5,25 +5,24 @@ class Public::GroupsController < ApplicationController
   def new
     @group = Group.new
   end
-
+  
+  def create
+    @group = Group.new(group_params)
+    @group.owner_id = current_user.id
+    if @group.save
+      redirect_to public_group_path(@group)
+      flash[:notice] = "You have created group successfully."
+    else
+      render  :new
+    end
+  end
+  
   def index
     @groups = Group.all
   end
 
   def show
     @group = Group.find(params[:id])
-  end
-
-  def create
-    @group = Group.new(group_params)
-    @group.owner_id = current_user.id
-    
-    if @group.save
-      redirect_to public_group_path(@group)
-      flash[:notice] = "You have created group successfully."
-    else
-      render :show
-    end
   end
   
   def edit
@@ -39,18 +38,12 @@ class Public::GroupsController < ApplicationController
 
   def update
     if @group.update(group_params)
-      redirect_to public_post_path
+      redirect_to :show
     else
       render "edit"
     end
   end
   
-  def join
-    @group = Group.find(params[:id])
-    @group.users << current_user
-    redirect_to public_post_path
-  end
-
   private
 
   def group_params
