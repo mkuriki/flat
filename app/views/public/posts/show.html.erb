@@ -22,8 +22,10 @@
             <td><%= link_to group.name, public_group_path(group) %></td>
             <td><%= group.introduction %></td>
             <td><%= group.users.count %></td>
-            <% if group.is_owned_by?(current_user) %>
-                <td><%= link_to "Edit", edit_public_group_path(group), class: "btn btn-sm btn-success edit_group" %></td>
+            <% if user_signed_in? %>
+              <% if group.is_owned_by?(current_user) %>
+                  <td><%= link_to "Edit", edit_public_group_path(group), class: "btn btn-sm btn-success edit_group" %></td>
+              <% end %>
             <% end %>
           </tr>
         <% end %>
