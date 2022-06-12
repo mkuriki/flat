@@ -6,6 +6,9 @@
     <p>投稿ユーザー画像：<%= link_to image_tag(@post.user.get_profile_image(100,100)), public_user_path(@post.user) %></p>
     <p>ユーザーネーム：<%= @post.user.name %></p>
     <p class="comments_count">コメント数: <%= @post.post_comments.count %></p>
+    <% @post.tags.each do |tag| %>
+      <%= tag.name %>
+    <% end %>
     <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
     
     <h2>Groups</h2>
