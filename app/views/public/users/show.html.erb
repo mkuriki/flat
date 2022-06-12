@@ -16,34 +16,63 @@
           </tbody>
       </table>
       
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalLong">
+        <i class="fa fa-search"></i>
+      </button>
+      
+      <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">検索</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <%= form_with url: public_search_path, method: :get, local: true do |f| %>
+            <div class="modal-body">
+               <%= f.label :word, "投稿やユーザを検索"%>
+               <%= f.text_field :word, size: "50", placeholder: "検索" %>
+               <%= f.select :range, options_for_select([["投稿検索", 'Post'], ["ユーザー検索", 'User']]) %>
+               <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backward_match"], ["部分一致","partial_match"]]) %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+              <%= button_tag '<i class="fa fa-search"></i>'.html_safe, :type => "submit", :class =>"btn btn-success" %>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
       <!--ログインユーザーのみ閲覧可能-->
       <% if @user == current_user %>
-      <%= link_to edit_public_user_path(@user), class: "btn btn-outline-secondary btn-lg" do %>
-        <i class="fas fa-user-cog"></i>　編集
-      <% end %>
-      <table>
-        <h4>マイリスト</h4>
-        <thead>
-          <tr>
-            <th>投稿者名</th>
-            <th>タイトル</th>
-            <th>本文</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @favorites.each do |favorite| %>
+        <%= link_to edit_public_user_path(@user), class: "btn btn-outline-secondary btn-lg" do %>
+          <i class="fas fa-user-cog"></i>　編集
+        <% end %>
+        <table>
+          <h4>マイリスト</h4>
+          <thead>
             <tr>
-              <td><%= favorite.post.user.name %></td>
-              <td>
-                <%= link_to public_post_path(favorite.post) do %>
-                  <%= favorite.post.title %>
-                <% end %>
-              </td>
-              <td><%= favorite.post.body %></td>
+              <th>投稿者名</th>
+              <th>タイトル</th>
+              <th>本文</th>
             </tr>
-          <% end %>
-        </tbody>
-      </table> 
+          </thead>
+          <tbody>
+            <% @favorites.each do |favorite| %>
+              <tr>
+                <td><%= favorite.post.user.name %></td>
+                <td>
+                  <%= link_to public_post_path(favorite.post) do %>
+                    <%= favorite.post.title %>
+                  <% end %>
+                </td>
+                <td><%= favorite.post.body %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table> 
       <% end %>
     </div>
   </div>
