@@ -33,8 +33,9 @@ class Public::PostsController < ApplicationController
   end
 
   def update
+    @post = Post.find(params[:id])
     if @post.update(post_params)
-      redirect_to admin_post_path(@post), notice: "You have updated post successfully."
+      redirect_to public_post_path(@post), notice: "You have updated post successfully."
     else
       render "edit"
     end

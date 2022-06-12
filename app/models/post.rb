@@ -5,6 +5,9 @@ class Post < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   
   has_one_attached :post_image, dependent: :destroy
+  
+  validates :title, length: { minimum: 2, maximum: 20 }, uniqueness: true
+  validates :body, length: { maximum: 50 }
 
   def get_post_image(width, height)
     unless post_image.attached?
@@ -17,7 +20,20 @@ class Post < ApplicationRecord
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
+  
+  # 検索方法分岐
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @post = Post.where("title LIKE?","#{word}")
+    elsif search == "forward_match"
+      @post = Post.where("title LIKE?","#{word}%")
+    elsif search == "backward_match"
+      @post = Post.where("title LIKE?","%#{word}")
+    elsif search == "partial_match"
+      @post = Post.where("title LIKE?","%#{word}%")
+    else
+      @post = Post.all
+    end
+  end
 
-  validates :title, length: { minimum: 2, maximum: 20 }, uniqueness: true
-  validates :body, length: { maximum: 50 }
 end

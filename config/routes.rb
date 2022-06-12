@@ -44,12 +44,13 @@ Rails.application.routes.draw do
     resources :groups do
       resource :group_users, only: [:create, :destroy]
     end
+    #検索
+    get "search" => 'searches#search'
   end
 
   
   get "home/about" => 'homes#about'
-  #検索
-  get "search" => 'searches#search'
+
 
 
 
