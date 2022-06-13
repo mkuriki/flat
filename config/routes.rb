@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     sessions: 'public/sessions'
   }
   
+  
+  root to: 'public/homes#top'
+  get "public/about" => 'public/homes#about'
 
   #管理者側
   namespace :admin do
@@ -50,7 +53,6 @@ Rails.application.routes.draw do
   end
 
   
-  get "home/about" => 'homes#about'
 
 
 
