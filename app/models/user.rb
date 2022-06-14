@@ -3,13 +3,13 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         
+
   has_many :posts, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :group_users
   has_many :groups, through: :group_users
-  
+
   has_one_attached :profile_image, dependent: :destroy
 
   #ユーザーのプロフィール画像
@@ -20,9 +20,9 @@ class User < ApplicationRecord
     end
       profile_image.variant(resize_to_limit: [width, height]).processed
   end
-  
+
   # 検索方法分岐
-  def self.looks(search, word)
+  def self.search_for(search, word)
     if search == "perfect_match"
       @user = User.where("name LIKE?", "#{word}")
     elsif search == "forward_match"

@@ -7,10 +7,10 @@
     <p>ユーザーネーム：<%= @post.user.name %></p>
     <p class="comments_count">コメント数: <%= @post.post_comments.count %></p>
     <% @post.tags.each do |tag| %>
-      <%= tag.name %>
+      <li style="list-style: none;"><%= link_to tag.name, public_search_path(word: tag.name, range:"Tag", search: "perfect_match") %></li>
     <% end %>
     <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
-    
+
     <h2>Groups</h2>
     <table class = "table table-hover">
        <thead>
@@ -34,13 +34,13 @@
         <% end %>
        </body>
     </table>
-    
+
     <% if @post.user == current_user || admin_signed_in? %>
       <%= link_to "グループを作成する", new_public_group_path, class: "btn btn-sm btn-success new_group" %>
       <%= link_to "投稿編集", edit_public_post_path(@post), class: "btn btn-sm btn-success edit_post" %>
       <%= link_to "投稿削除", public_post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger destroy_post"  %>
     <% end %>
-    
+
     <div class="comments_index">
       <%= render 'public/post_comments/index', post: @post, post_comment: @post_comment %>
     </div>

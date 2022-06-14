@@ -14,8 +14,3 @@
   password: 'testtest',
   )
 
- Tag.create!([
-   { name: 'event' },
-   { name: 'travel' },
-   { name: 'other'},
-   ])
