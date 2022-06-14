@@ -50,6 +50,7 @@ Rails.application.routes.draw do
     end
     #検索
     get "search" => 'searches#search'
+    get "search_tag"=>"posts#search_tag"
   end
 
   

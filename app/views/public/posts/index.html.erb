@@ -11,6 +11,11 @@
     <div>
       <!--検索フォーム-->
       <%= render 'public/searches/form' %>
+      <!--タグリスト-->
+      <% @tag_list.each do |list|%>
+      <%=link_to list.name, public_search_tag_path(tag_id: list.id) %>
+      <%="(#{list.posts.count})" %><% end %>
+
       <h2>投稿一覧</h2>
       <% @posts.each do |post| %>
         <div>
@@ -22,6 +27,9 @@
           <p id="fav_<%= post.id %>"><%= render "public/favorites/fav", post: post %></p>
           <p>説明：<%= post.body %></p>
           <p>ユーザーネーム：<%= post.user.name %></p>
+          <% post.tags.each do |tag| %>
+            <li style="list-style: none;"><%= link_to tag.name, public_search_path(word: tag.name, range:"Tag", search: "perfect_match") %></li>
+          <% end %>
         </div>
       <% end %>
     </div>
