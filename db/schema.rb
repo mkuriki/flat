@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2022_06_07_085413) do
     t.text "introduction"
     t.string "group_image_id"
     t.integer "owner_id"
+    t.integer "post_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -94,6 +95,7 @@ ActiveRecord::Schema.define(version: 2022_06_07_085413) do
     t.string "title"
     t.text "body"
     t.integer "user_id"
+    t.integer "group_id"
     t.integer "post_image_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

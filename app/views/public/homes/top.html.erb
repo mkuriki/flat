@@ -1,9 +1,9 @@
 <div class = "container">
   <div class = "row">
     <div class = "col-12">
-      <h1>Make Your Day !!</h1>
-      <p>新しい冒険してみませんか？仲間が見つかるコミュニティサイト</p>
-      
+      <h1>header</h1>
+      <p>paragraph</p>
+
       <div class="search_form">
         <div>
         <%= form_with url: public_search_path, local: true, method: :get do |f| %>
@@ -14,11 +14,11 @@
         <% end %>
         </div>
       </div>
-      
+
       <%= link_to public_posts_path, class: "btn btn-outline-info btn-lg" do %>
       <i class="fas fa-search"></i> もっと見る
       <% end %>
-      
+
       <h2>新着投稿</h2>
       <div class="d-flex justify-content-around">
         <% @posts.each do |post| %>

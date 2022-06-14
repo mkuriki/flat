@@ -10,7 +10,7 @@ class Public::SearchesController < ApplicationController
     elsif @range == 'Post'
       @posts = Post.search_for(@search, @word)
     elsif @range == 'Tag'
-      @tags = Tag.search_posts_for(@search, @word)
+      @posts = Tag.search_posts_for(@search, @word)
     end
   end
 end

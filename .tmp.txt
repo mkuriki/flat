@@ -1,0 +1,19 @@
+: @tag.inject(init = []) {|result, tag| result + tag.posts}
+
+ZENTEI:
+@tag = [tag1 ,tag2]
+
+1.
+result = []
+tag = tag1
+> result + tag.posts
+> []     + tag1.posts
+=> [tag1.posts]
+
+2.
+result = [tag1.posts]
+tag = tag2
+> result + tag.posts
+> [tag1.posts] + tag2.posts
+=> [tag1.posts tag2.posts]
+=> posts list 

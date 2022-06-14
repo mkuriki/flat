@@ -7,8 +7,10 @@ class Public::GroupsController < ApplicationController
   end
   
   def create
+    @post = Post.find(params[:post_id])
     @group = Group.new(group_params)
     @group.owner_id = current_user.id
+    @group.post_id = @post.id
     if @group.save
       redirect_to public_group_path(@group)
       flash[:notice] = "You have created group successfully."
