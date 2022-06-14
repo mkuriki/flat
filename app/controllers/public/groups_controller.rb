@@ -38,7 +38,7 @@ class Public::GroupsController < ApplicationController
 
   def update
     if @group.update(group_params)
-      redirect_to :show
+      redirect_to public_group_path(@group)
     else
       render "edit"
     end
