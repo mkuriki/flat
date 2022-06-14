@@ -20,6 +20,7 @@
         <i class="fa fa-search"></i>
       </button>
       
+      <!--検索-->
       <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -45,11 +46,16 @@
         </div>
       </div>
 
-      <!--ログインユーザーのみ閲覧可能-->
+      <!--閲覧権限_ログインユーザーのみ閲覧可能-->
       <% if @user == current_user %>
+      
+        <%= link_to "退会する", public_path(current_user) %>
+      
+        <!--ユーザー情報編集-->
         <%= link_to edit_public_user_path(@user), class: "btn btn-outline-secondary btn-lg" do %>
           <i class="fas fa-user-cog"></i>　編集
         <% end %>
+        
         <table>
           <h4>マイリスト</h4>
           <thead>

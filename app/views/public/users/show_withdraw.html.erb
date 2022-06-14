@@ -1,0 +1,16 @@
+<div class = "container">
+      <div class = "col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto mt-5 text-center">
+        <h2 class = ""><strong>本当に退会しますか？</strong></h2>
+        <p>退会すると、登録情報が閲覧できなくなります。</p>
+        <p class="text-nowrap">退会する場合は、「退会する」をクリックしてください。</p>
+
+      </div>
+
+      <div class="d-grid  text-center col-sm-12 col-md-8 col-lg-4 offset-lg-4">
+        <div class = "row">
+
+          <%= link_to "退会しない", public_user_path(current_user.id), class: "btn btn-primary not_destroy_user col-lg-5" %>
+          <%= link_to "退会する", public_path, method: :patch, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger destroy_user col-lg-5 offset-lg-2" %>
+        </div>
+      </div>
+</div>

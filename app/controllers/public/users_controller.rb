@@ -22,9 +22,13 @@ class Public::UsersController < ApplicationController
       render :edit
     end
   end
+  
+  def show_withdraw
+    @user = User.find(params[:id])
+  end
 
   def withdraw
-    @user = user.find(params[:id])
+    @user = User.find(params[:id])
     if @user.is_deleted = true
       @user.save!
       reset_session
