@@ -15,11 +15,11 @@
             </tr>
           </tbody>
       </table>
-      
+
       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalLong">
         <i class="fa fa-search"></i>
       </button>
-      
+
       <!--検索-->
       <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -48,14 +48,16 @@
 
       <!--閲覧権限_ログインユーザーのみ閲覧可能-->
       <% if @user == current_user %>
-      
+
+        <!--退会-->
         <%= link_to "退会する", public_path(current_user) %>
-      
+
         <!--ユーザー情報編集-->
         <%= link_to edit_public_user_path(@user), class: "btn btn-outline-secondary btn-lg" do %>
           <i class="fas fa-user-cog"></i>　編集
         <% end %>
-        
+
+        <!--ユーザーがいいねした投稿一覧-->
         <table>
           <h4>マイリスト</h4>
           <thead>
@@ -78,7 +80,30 @@
               </tr>
             <% end %>
           </tbody>
-        </table> 
+        </table>
+        <table>
+          <h4>マイグループ</h4>
+          <thead>
+            <tr>
+              <th>グループ名</th>
+              <th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @groups.each do |group| %>
+              <tr>
+                <td>
+                  <%= link_to public_group_path(group) do %>
+                    <%= group.group.name %>
+                  <% end %>
+                </td>
+                <td><%= group.group.introduction %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+
       <% end %>
     </div>
   </div>
