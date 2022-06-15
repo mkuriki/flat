@@ -1,6 +1,7 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!, only: [:show, :update, :edit]
   before_action :correct_user, only: [:withdraw, :edit, :update]
+  before_action :ensure_guest_user, only: [:edit]
   
   
   def show
@@ -49,5 +50,13 @@ class Public::UsersController < ApplicationController
   @user = User.find(params[:id])
   redirect_to(public_user_path(current_user)) unless @user == current_user
   end
-  
+  #ゲストユーザーの編集規制
+  def ensure_guest_user
+    @user = User.find(params[:id])
+    if @user.name == "guestuser"
+      redirect_to user_path(current_user) , notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
+    end
+  end  
 end
+  
+

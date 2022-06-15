@@ -11,6 +11,13 @@ class User < ApplicationRecord
   has_many :groups, through: :group_users
 
   has_one_attached :profile_image, dependent: :destroy
+  
+  def self.guest
+    find_or_create_by!(name: 'guestuser' ,email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "guestuser"
+    end
+  end
 
   #ユーザーのプロフィール画像
   def get_profile_image(width, height)

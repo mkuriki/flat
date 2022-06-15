@@ -53,12 +53,15 @@
 
       <div class = "col-12 ">
         <div>
-          <!--ユーザー情報編集-->
           <div class = "text-center mb-3">
           <!--退会-->
           <%= link_to "退会する", public_path(current_user) %>
-          <%= link_to edit_public_user_path(@user), class: "btn btn-outline-secondary btn-lg ml-3" do %>
-            <i class="fas fa-user-cog"></i>　プロフィールを編集
+          <!--ユーザーの名前がguestuserである場合には、表示しません-->
+          <% if @user.name != "guestuser" %>
+            <!--ユーザー情報編集-->
+            <%= link_to edit_public_user_path(@user), class: "btn btn-outline-secondary btn-lg ml-3" do %>
+              <i class="fas fa-user-cog"></i>　プロフィールを編集
+            <% end %>
           <% end %>
           </div>
         </div>
@@ -90,6 +93,7 @@
               </tbody>
             </table>
           </div>
+           <!--ユーザーが参加したグループ一覧-->
           <div class = "col-6 mx-auto text-center">
             <table>
               <h4>マイグループ</h4>

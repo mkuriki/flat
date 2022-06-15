@@ -9,6 +9,11 @@ Rails.application.routes.draw do
     sessions: 'public/sessions'
   }
   
+  #ゲスト側
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
+  end
+  
   
   root to: 'public/homes#top'
   get "public/about" => 'public/homes#about'
@@ -29,7 +34,7 @@ Rails.application.routes.draw do
     
   end
 
-  #ユーザー側
+  #会員側
   namespace :public do
     #トップ
     root to: 'homes#top'

@@ -16,9 +16,14 @@
       <!--ボタン＿投稿一覧ページへ遷移-->
       <div class= "text-center m-3">
         <%= link_to public_posts_path, class: "btn btn-outline-info btn-lg" do %>
-        <i class="fas fa-search"></i> もっと見る
+        <i class="fas fa-search"></i> 投稿をチェック
         <% end %>
       </div>
+      
+       <!--ボタン＿ゲストログインページへ遷移-->
+      <div class="row">
+        <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in", method: :post %>
+      </div>     
       
       <!--新着投稿一覧-->
       <h2 class= "text-center m-3">新着投稿</h2>
