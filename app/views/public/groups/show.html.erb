@@ -20,7 +20,6 @@
               <% end %>
             </td>
             <td>
-              <%= link_to '投稿詳細ページへ戻る', public_post_path(@post) %>
               <% if @group.users.include?(current_user)%>
                <%= link_to 'Leave this group', public_group_group_users_path(@group), method: :delete, class: "btn btn-sm btn-danger" %>
               <% else %>
