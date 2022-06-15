@@ -22,17 +22,17 @@
         <% @groups.each do |group| %>
           <tr>
             <td><%= image_tag group.get_group_image(50,50) %></td>
-            <td><%= link_to group.name, admin_group_path(group) %></td>
+            <td><%= link_to group.name, admin_post_group_path(@post, group) %></td>
             <td><%= group.introduction %></td>
             <td><%= group.users.count %></td>
-            <td><%= link_to "編集", edit_admin_group_path(group), class: "btn btn-sm btn-success edit_group" %></td>
-            <td><%= link_to "削除", admin_group_path(group), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger destroy_group" %></td>
+            <td><%= link_to "編集", edit_admin_post_group_path(@post, group), class: "btn btn-sm btn-success edit_group" %></td>
+            <td><%= link_to "削除", admin_post_path(group), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger destroy_group" %></td>
           </tr>
         <% end %>
        </body>
     </table>
     <%= link_to "投稿編集", edit_admin_post_path(@post), class: "btn btn-sm btn-success edit_post" %>
-    <%= link_to "投稿削除", admin_post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger destroy_post"  %>
+    <%= link_to "投稿削除", admin_post_group_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger destroy_post"  %>
   </div>
 </div>
 

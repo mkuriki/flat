@@ -1,16 +1,18 @@
 class Admin::GroupsController < ApplicationController
   before_action :authenticate_admin!
-  
+
   def index
     @groups = Group.all
   end
 
   def show
+    @post = Post.find(params[:post_id])
     @group = Group.find(params[:id])
   end
-  
+
   def edit
     @group = Group.find(params[:id])
+    @post = Post.find(params[:post_id])
   end
 
   def destroy
@@ -26,5 +28,5 @@ class Admin::GroupsController < ApplicationController
       render "edit"
     end
   end
-  
+
 end

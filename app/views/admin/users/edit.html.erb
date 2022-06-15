@@ -8,9 +8,9 @@
 <% end %>
 <%= form_with model: [:admin, @user] do |f| %>
   <div class = "container">
+      <h4 class = "text-center m-3"><%= @user.name %>さんの会員情報編集</h4>
     <div class = "col-sm-6 mx-auto">
       
-      <h4 class = "text-center mb-3"><%= @user.name %>さんの会員情報編集</h4>
       <div class = "row mb-2">
             <label class = "col-sm-4">会員id</label>
             <%= @user.id %>
@@ -18,13 +18,16 @@
       <div class = "row mb-2">
         <label class = "col-sm-4">氏名</label>
         <div class = "form-inline col-sm-8 px-0">
-         <%= f.text_field :last_name, class: "form-control col-sm-5 col-md-offset-5" %>
-         <%= f.text_field :first_name, class: "form-control col-sm-5 col-md-offset-5 ml-2" %>        
+         <%= f.text_field :name, class: "form-control col-sm-8 col-md-offset-5" %>
         </div>
       </div>
       <div class="row mb-2">
         <label class = "col-sm-4">メールアドレス</label>
         <%= f.email_field :email, class: "form-control col-sm-8 col-md-offset-5" %>
+      </div>
+      <div class="row mb-2">
+        <label class = "col-sm-4">電話番号</label>
+        <%= f.phone_field :phone_number, class: "form-control col-sm-8 col-md-offset-5" %>
       </div>
       <div class="row mb-2">
         <label class = "col-sm-4">会員ステータス</label>
@@ -37,7 +40,7 @@
             <%= f.label :is_deleted, "有効" %>
           </div>
       </div>
-      <div class = "text-center">
+      <div class = "text-center mb-3">
       <%= f.submit "編集内容を保存する", class: "btn btn-outline-primary mt-3 p-3" %>
       </div>
     </div>

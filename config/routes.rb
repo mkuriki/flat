@@ -24,14 +24,13 @@ Rails.application.routes.draw do
     resources :users
     #投稿
     resources :posts do
-    #コメント機能
-    resources :post_comments, only: [:create, :destroy]
+      #コメント機能
+      resources :post_comments, only: [:create, :destroy]
+      #グループ機能
+      resources :groups do
+        resource :group_users, only: [:create, :destroy]
+      end
     end
-     #グループ機能
-    resources :groups do
-      resource :group_users, only: [:create, :destroy]
-    end
-    
   end
 
   #会員側
@@ -48,12 +47,12 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create, :destroy]
       #コメント機能
       resources :post_comments, only: [:create, :destroy]
-  
       #グループ機能
       resources :groups do
         resource :group_users, only: [:create, :destroy]
       end
     end
+    
     #検索
     get "search" => 'searches#search'
     get "search_tag"=>"posts#search_tag"

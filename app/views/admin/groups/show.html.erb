@@ -15,12 +15,12 @@
             <td><%= @group.name %></td>
             <td><%= @group.introduction %></td>
             <td>
-              <%= @group.users.each do |member| %>
+              <% @group.users.each do |member| %>
               <li style="list-style: none;"><%= member.name %></li>
               <% end %>
             </td>
             <td>
-               <%= link_to 'Edit', edit_admin_group_path(@group), class: "btn btn-sm btn-success" %>
+               <%= link_to 'Edit', edit_admin_post_group_path(@post, @group), class: "btn btn-sm btn-success" %>
             </td>
         </tr>
     </tbody>
