@@ -43,10 +43,11 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create, :destroy]
       #コメント機能
       resources :post_comments, only: [:create, :destroy]
-    end
-    #グループ機能
-    resources :groups do
-      resource :group_users, only: [:create, :destroy]
+  
+      #グループ機能
+      resources :groups do
+        resource :group_users, only: [:create, :destroy]
+      end
     end
     #検索
     get "search" => 'searches#search'

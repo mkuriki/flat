@@ -1,10 +1,10 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
-  
+
   def new
     @post = Post.new
   end
-  
+
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
@@ -18,12 +18,12 @@ class Public::PostsController < ApplicationController
       render :index
     end
   end
-  
+
   def index
     @posts = Post.all
     @tag_list=Tag.all
   end
-  
+
   def show
     @post = Post.find(params[:id])
     @post_comment = PostComment.new
@@ -48,7 +48,7 @@ class Public::PostsController < ApplicationController
     @post.destroy
     redirect_to  public_posts_path
   end
-  
+
   def search_tag
     #検索結果画面でもタグ一覧表示
     @tag_list = Tag.all
@@ -57,7 +57,7 @@ class Public::PostsController < ApplicationController
     #検索されたタグに紐づく投稿を表示
     @posts = @tag.posts
   end
-  
+
   # 投稿データのストロングパラメータ
   private
 

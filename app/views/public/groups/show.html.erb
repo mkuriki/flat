@@ -21,12 +21,12 @@
             </td>
             <td>
               <% if @group.users.include?(current_user)%>
-               <%= link_to 'Leave this group', public_group_group_users_path(@group), method: :delete, class: "btn btn-sm btn-danger" %>
+               <%= link_to 'Leave this group', public_post_group_group_users_path(@group), method: :delete, class: "btn btn-sm btn-danger" %>
               <% else %>
-               <%= link_to 'Join this group', public_group_group_users_path(@group), method: :post, class: "btn btn-sm btn-info" %>
+               <%= link_to 'Join this group', public_post_group_group_users_path(@post, @group), method: :post, class: "btn btn-sm btn-info" %>
               <% end %>
               <% if (user_signed_in? || admin_signed_in?) && @group.owner_id == current_user.id %>
-               <%= link_to 'Edit', edit_public_group_path(@group), class: "btn btn-sm btn-success" %>
+               <%= link_to 'Edit', edit_public_post_group_path(@post, @group), class: "btn btn-sm btn-success" %>
               <% end %>
             </td>
         </tr>
