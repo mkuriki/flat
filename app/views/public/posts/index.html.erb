@@ -1,36 +1,19 @@
 <div class="container">
-  <div class = "row">
+  <div class="mb-auto">
     <!--新規投稿-->
     <div>
       <%= link_to new_public_post_path, class: "btn btn-outline-info btn-lg" do %>
         <i class="fas fa-flag"></i> 投稿する
       <% end %>
     </div>
-    
-    <!--投稿一覧表示-->
-    <div>
-      <!--検索フォーム-->
+    <!--検索フォーム-->
       <%= render 'public/searches/form' %>
-      <!--タグリスト-->
+    <!--タグリスト-->
       <% @tag_list.each do |list|%>
       <%=link_to list.name, public_search_tag_path(tag_id: list.id) %>
-      <%="(#{list.posts.count})" %><% end %>
-
-      <h2>投稿一覧</h2>
-      <% @posts.each do |post| %>
-        <div>
-          <%= link_to public_post_path(post.id) do %>
-            <%= image_tag post.get_post_image(200,200) %>
-          <% end %>
-          <p>投稿ユーザー画像：<%= link_to image_tag(post.user.get_profile_image(100,100)), public_user_path(post.user) %></p>
-          <p>タイトル：<%= link_to post.title, public_post_path(post) %></p>
-          <p id="fav_<%= post.id %>"><%= render "public/favorites/fav", post: post %></p>
-          <p>説明：<%= post.body %></p>
-          <p>ユーザーネーム：<%= post.user.name %></p>
-          <% post.tags.each do |tag| %>
-            <li style="list-style: none;"><%= link_to tag.name, public_search_path(word: tag.name, range:"Tag", search: "perfect_match") %></li>
-          <% end %>
-        </div>
+      <%="(#{list.posts.count})" %>
       <% end %>
-    </div>
+    <!--投稿一覧-->
+      <%= render "public/posts/index", posts: @posts %>
+  </div>
 </div>

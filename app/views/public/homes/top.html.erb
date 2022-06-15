@@ -1,39 +1,28 @@
 <div class = "container">
   <div class = "row">
     <div class = "col-12">
-      <h1>header</h1>
-      <p>paragraph</p>
-
+      <h1 class = "text-center m-5">header</h1>
+      <p class = "text-center">paragraph</p>
+      <!--検索フォーム-->
       <div class="search_form">
-        <div>
         <%= form_with url: public_search_path, local: true, method: :get do |f| %>
           <%= f.text_field :word, placeholder: "Search", class: "form-control" %>
           <%= f.select :range, options_for_select([["投稿検索", 'Post'], ["ユーザー検索", 'User']]) %>
           <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backward_match"], ["部分一致","partial_match"]]) %>
           <%= f.submit "検索", class: "btn btn-primary" %>
         <% end %>
-        </div>
       </div>
-
-      <%= link_to public_posts_path, class: "btn btn-outline-info btn-lg" do %>
-      <i class="fas fa-search"></i> もっと見る
-      <% end %>
-
-      <h2>新着投稿</h2>
-      <div class="d-flex justify-content-around">
-        <% @posts.each do |post| %>
-          <div class="col-md-2">
-            <%= link_to public_post_path(post.id) do %>
-              <%= image_tag post.get_post_image(200,200) %>
-            <% end %>
-            <p>投稿ユーザー画像：<%= link_to image_tag(post.user.get_profile_image(100,100)), public_user_path(post.user) %></p>
-            <p>タイトル：<%= link_to post.title, public_post_path(post) %></p>
-            <p id="fav_<%= post.id %>"><%= render "public/favorites/fav", post: post %></p>
-            <p>名前：<%= post.user.name %></p>
-            <p>説明：<%= post.body %></p>
-          </div>
+      
+      <!--ボタン＿投稿一覧ページへ遷移-->
+      <div class= "text-center m-3">
+        <%= link_to public_posts_path, class: "btn btn-outline-info btn-lg" do %>
+        <i class="fas fa-search"></i> もっと見る
         <% end %>
       </div>
+      
+      <!--新着投稿一覧-->
+      <h2 class= "text-center m-3">新着投稿</h2>
+      <%= render "public/posts/index", posts: @posts %>
   </div>
 </div>
 
