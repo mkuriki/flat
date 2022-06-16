@@ -1,21 +1,25 @@
-<div class = "container">
-  <div clss = "row">
-    <%= image_tag @post.get_post_image(200,200) %>
-    <p>タイトル：<%= @post.title %></p>
-    <p>説明：<%= @post.body %></p>
-    <p>投稿ユーザー画像：<%= link_to image_tag(@post.user.get_profile_image(100,100)), public_user_path(@post.user) %></p>
-    <p>ユーザーネーム：<%= @post.user.name %></p>
-    <p class="comments_count">コメント数: <%= @post.post_comments.count %></p>
-    <% @post.tags.each do |tag| %>
-      <li style="list-style: none;"><%= link_to tag.name, public_search_path(word: tag.name, range:"Tag", search: "perfect_match") %></li>
-    <% end %>
-    <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
+<div class = "container text-center">
+    <div class = "m-5">
+      <%= image_tag @post.get_post_image(200,200) %>
+      <p>タイトル：<%= @post.title %></p>
+      <p>説明：<%= @post.body %></p>
+      <p>投稿ユーザー画像：<%= link_to image_tag(@post.user.get_profile_image(100,100)), public_user_path(@post.user) %></p>
+      <p>ユーザーネーム：<%= @post.user.name %></p>
+      <p class="comments_count">コメント数: <%= @post.post_comments.count %></p>
+      <% @post.tags.each do |tag| %>
+        <li style="list-style: none;"><%= link_to tag.name, public_search_path(word: tag.name, range:"Tag", search: "perfect_match") %></li>
+      <% end %>
+      <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
+    </div>
 
-    <h2>Groups</h2>
+    <h3 class = "m-3">グループ</h3>
     <table class = "table table-hover">
        <thead>
         <tr>
-          <th>Uesrs</th>
+          <th></th>
+          <th>グループ名</th>
+          <th>説明文</th>
+          <th>メンバー数</th>
         </tr>
        </thead>
        <body>
@@ -27,7 +31,7 @@
             <td><%= group.users.count %></td>
             <% if user_signed_in? %>
               <% if group.is_owned_by?(current_user) %>
-                  <td><%= link_to "Edit", edit_public_post_group_path(@post, group), class: "btn btn-sm btn-success edit_group" %></td>
+                  <td><%= link_to "グループを編集", edit_public_post_group_path(@post, group), class: "btn btn-sm btn-success edit_group" %></td>
               <% end %>
             <% end %>
           </tr>
@@ -36,9 +40,11 @@
     </table>
 
     <% if @post.user == current_user || admin_signed_in? %>
-      <%= link_to "グループを作成する", new_public_post_group_path(@post), class: "btn btn-sm btn-success new_group" %>
-      <%= link_to "投稿編集", edit_public_post_path(@post), class: "btn btn-sm btn-success edit_post" %>
-      <%= link_to "投稿削除", public_post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger destroy_post"  %>
+      <div class = "m-3">
+        <%= link_to "グループを作成", new_public_post_group_path(@post), class: "btn btn-sm btn-info new_group " %>
+        <%= link_to "投稿編集", edit_public_post_path(@post), class: "btn btn-sm btn-success edit_post ml-3" %>
+        <%= link_to "投稿削除", public_post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger destroy_post ml-3" %>
+      </div>
     <% end %>
 
     <div class="comments_index">
@@ -47,6 +53,5 @@
     <div class="comments_form">
       <%= render 'public/post_comments/form', post: @post, post_comment: @post_comment %>
     </div>
-  </div>
 </div>
 

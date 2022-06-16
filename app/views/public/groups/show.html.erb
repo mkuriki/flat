@@ -1,34 +1,39 @@
-<h1>Group Detail</h1>
-<table class = "table">
-    <thead>
-        <tr>
-            <th colspan="1"></th>
-            <th>Group name</th>
-            <th>Introduction</th>
-            <th>Members</th>
-            <th colspan="1"></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><%= image_tag @group.get_group_image(50,50) %></td>
-            <td><%= @group.name %></td>
-            <td><%= @group.introduction %></td>
-            <td>
-              <% @group.users.each do |member| %>
-              <li style="list-style: none;"><%= member.name %></li>
-              <% end %>
-            </td>
-            <td>
-              <% if @group.users.include?(current_user)%>
-               <%= link_to 'Leave this group', public_post_group_group_users_path(@group), method: :delete, class: "btn btn-sm btn-danger" %>
-              <% else %>
-               <%= link_to 'Join this group', public_post_group_group_users_path(@post, @group), method: :post, class: "btn btn-sm btn-info" %>
-              <% end %>
-              <% if (user_signed_in? || admin_signed_in?) && @group.owner_id == current_user.id %>
-               <%= link_to 'Edit', edit_public_post_group_path(@post, @group), class: "btn btn-sm btn-success" %>
-              <% end %>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class = "container">
+  <div class = "row">
+    <h3 class = "m-3">グループ詳細</h3>
+    <table class = "table">
+        <thead>
+            <tr>
+                <th colspan="1"></th>
+                <th>グループ名</th>
+                <th>紹介文</th>
+                <th>メンバー</th>
+                <th colspan="1"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><%= image_tag @group.get_group_image(50,50) %></td>
+                <td><%= @group.name %></td>
+                <td><%= @group.introduction %></td>
+                <td>
+                  <% @group.users.each do |member| %>
+                  <li style="list-style: none;"><%= member.name %></li>
+                  <% end %>
+                </td>
+                <td>
+                  <% if @group.users.include?(current_user)%>
+                   <%= link_to 'グループから抜ける', public_post_group_group_users_path(@post, @group), method: :delete, class: "btn btn-sm btn-danger" %>
+                  <% else %>
+                   <%= link_to 'グループに参加する', public_post_group_group_users_path(@post, @group), method: :post, class: "btn btn-sm btn-info" %>
+                  <% end %>
+                  <% if (user_signed_in? || admin_signed_in?) && @group.owner_id == current_user.id %>
+                   <%= link_to 'Edit', edit_public_post_group_path(@post, @group), class: "btn btn-sm btn-success ml-3" %>
+                  <% end %>
+                  <%= link_to '投稿詳細へ戻る', public_post_path(@post), class: "ml-3" %>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+</div>

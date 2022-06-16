@@ -11,7 +11,7 @@
         <td><%= post_comment.comment %></td>
         <td>
           <% if post_comment.user == current_user || admin_signed_in? %>
-            <%= link_to "Destroy", public_post_post_comment_path(post, post_comment), method: :delete, remote: true, class: "btn btn-danger pull-right" %>
+            <%= link_to "コメント削除", public_post_post_comment_path(post, post_comment), method: :delete, remote: true, class: "btn btn-danger pull-right ml-3" %>
           <% end %>
         </td>
       </tr>

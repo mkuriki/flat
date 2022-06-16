@@ -13,3 +13,6 @@
  *= require_tree .
  *= require_self
  */
+footer{
+    min-height: 100vh;
+}
