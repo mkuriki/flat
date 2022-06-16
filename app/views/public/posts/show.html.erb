@@ -31,7 +31,7 @@
             <td><%= group.users.count %></td>
             <% if user_signed_in? %>
               <% if group.is_owned_by?(current_user) %>
-                  <td><%= link_to "グループを編集", edit_public_post_group_path(@post, group), class: "btn btn-sm btn-success edit_group" %></td>
+                  <td><%= link_to "グループ編集", edit_public_post_group_path(@post, group), class: "btn btn-sm btn-success edit_group" %></td>
               <% end %>
             <% end %>
           </tr>
@@ -41,7 +41,7 @@
 
     <% if @post.user == current_user || admin_signed_in? %>
       <div class = "m-3">
-        <%= link_to "グループを作成", new_public_post_group_path(@post), class: "btn btn-sm btn-info new_group " %>
+        <%= link_to "グループ作成", new_public_post_group_path(@post), class: "btn btn-sm btn-info new_group " %>
         <%= link_to "投稿編集", edit_public_post_path(@post), class: "btn btn-sm btn-success edit_post ml-3" %>
         <%= link_to "投稿削除", public_post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger destroy_post ml-3" %>
       </div>

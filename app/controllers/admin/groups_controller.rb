@@ -23,7 +23,8 @@ class Admin::GroupsController < ApplicationController
 
   def update
     if @group.update(group_params)
-      redirect_to :show
+      @post = Post.find(params[:post_id])
+      redirect_to public_post_group_path(@post, @group)
     else
       render "edit"
     end

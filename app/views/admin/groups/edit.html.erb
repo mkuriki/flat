@@ -1,10 +1,9 @@
 <body>
-    <main>
         <p id = notice></p>
         <div class = container>
             <div class = row>
                 <div class = "col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-                    <h1>グループを編集</h1>
+                    <h3 class = "text-center m-3">グループを編集</h3>
                     <%= form_with model:[:admin, @group], url:edit_admin_post_group_path(@post, @group) do |f| %>
                       <div class="form-group">
                           <label for="group_name">グループ名</label>
@@ -26,5 +25,4 @@
                 </div>
             </div>
         </div>
-    </main>
 </body>

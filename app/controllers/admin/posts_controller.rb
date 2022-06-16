@@ -8,7 +8,7 @@ class Admin::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @post_comment = PostComment.new
-    @groups = Group.all
+    @groups = Group.where(post_id: @post.id)
   end
 
   def edit
