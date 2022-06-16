@@ -1,7 +1,6 @@
 <div class="container">
-  <div class = "row">
     <%= form_with model:[:public, @post], local: true do |f| %>
-      <h4>投稿する</h4>
+      <h3 class = "m-3">投稿する</h3>
       <%= f.file_field :post_image, accept: "image/*" %>
       <div class = form-group>
         <label for="post_title">タイトル</label>
@@ -19,6 +18,4 @@
         <%= f.submit '投稿する', class: "btn btn-sm btn-success" %>
       </div>
     <% end %>
-      
-  </div>
 </div>

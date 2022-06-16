@@ -107,7 +107,7 @@
                 <% @groups.each do |group| %>
                   <tr>
                     <td>
-                      <%= link_to public_post_group_path(group.post.id, group) do %>
+                      <%= link_to public_post_group_path(group.group.post.id, group) do %>
                         <%= group.group.name %>
                       <% end %>
                     </td>
