@@ -1,4 +1,5 @@
-<div class = "container">
+<div class = "container text-center">
+  <div class = "m-5">
     <%= image_tag @post.get_post_image(200,200) %>
     <p>タイトル：<%= @post.title %></p>
     <p>説明：<%= @post.body %></p>
@@ -6,8 +7,9 @@
     <p>ユーザーネーム：<%= @post.user.name %></p>
     <p class="comments_count">コメント数: <%= @post.post_comments.count %></p>
     <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
+  </div>
 
-    <h3>グループ一覧</h3>
+    <h3 class = "m-3">グループ</h3>
     <table class = "table table-hover">
        <thead>
         <tr>
@@ -24,13 +26,15 @@
             <td><%= link_to group.name, admin_post_group_path(@post, group) %></td>
             <td><%= group.introduction %></td>
             <td><%= group.users.count %></td>
-            <td><%= link_to "グループ編集", edit_admin_post_group_path(@post, group), class: "btn btn-sm btn-success edit_group" %></td>
-            <td><%= link_to "グループ削除", admin_post_path(group), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger destroy_group" %></td>
+            <div class = "m-3">
+              <td><%= link_to "グループ編集", edit_admin_post_group_path(@post, group), class: "btn btn-sm btn-success edit_group" %></td>
+              <td><%= link_to "グループ削除", admin_post_path(group), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger destroy_group" %></td>
+            </div>
           </tr>
         <% end %>
        </body>
     </table>
     <%= link_to "投稿編集", edit_admin_post_path(@post), class: "btn btn-sm btn-success edit_post" %>
-    <%= link_to "投稿削除", admin_post_group_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger destroy_post"  %>
+    <%= link_to "投稿削除", admin_post_group_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger destroy_post ml-3"  %>
 </div>
 

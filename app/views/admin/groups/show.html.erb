@@ -1,27 +1,29 @@
-<h3 class = "text-center m-3">グループ詳細</h3>
-<table class = "table">
-    <thead>
-        <tr>
-            <th colspan="1"></th>
-            <th>グループ名</th>
-            <th>紹介文</th>
-            <th>メンバー</th>
-            <th colspan="1"></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><%= image_tag @group.get_group_image(50,50) %></td>
-            <td><%= @group.name %></td>
-            <td><%= @group.introduction %></td>
-            <td>
-              <% @group.users.each do |member| %>
-              <li style="list-style: none;"><%= member.name %></li>
-              <% end %>
-            </td>
-            <td>
-               <%= link_to 'Edit', edit_admin_post_group_path(@post, @group), class: "btn btn-sm btn-success" %>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class = "container">
+    <h3 class = "text-center m-3">グループ詳細</h3>
+    <table class = "table">
+        <thead>
+            <tr>
+                <th colspan="1"></th>
+                <th>グループ名</th>
+                <th>紹介文</th>
+                <th>メンバー</th>
+                <th colspan="1"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><%= image_tag @group.get_group_image(50,50) %></td>
+                <td><%= @group.name %></td>
+                <td><%= @group.introduction %></td>
+                <td>
+                  <% @group.users.each do |member| %>
+                  <li style="list-style: none;"><%= member.name %></li>
+                  <% end %>
+                </td>
+                <td>
+                   <%= link_to '編集', edit_admin_post_group_path(@post, @group), class: "btn btn-sm btn-success" %>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
