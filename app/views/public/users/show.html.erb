@@ -1,8 +1,8 @@
 <div class = "container">
   <div class = "row">
       <div class = "col-12">
-      <h2 class = "p-3">ユーザー情報</h2>
-      <%= image_tag @user.get_profile_image(100,100) %>
+      <h2 class = "p-3">マイページ</h2>
+      <div class = "col-12 text-center"><%= image_tag @user.get_profile_image(100,100) %></div>
       <table class="table">
           <tbody>
             <tr>
@@ -54,8 +54,6 @@
       <div class = "col-12 ">
         <div>
           <div class = "text-center mb-3">
-          <!--退会-->
-          <%= link_to "退会する", public_path(current_user) %>
           <!--ユーザーの名前がguestuserである場合には、表示しません-->
           <% if @user.name != "guestuser" %>
             <!--ユーザー情報編集-->
@@ -68,14 +66,13 @@
 
         <div class = "d-flex justify-content-around">
           <!--ユーザーがいいねした投稿一覧-->
-          <div class = "col-6 mx-auto text-center">
-            <table>
-              <h4>マイリスト</h4>
+          <div class = "col-5 text-center">
+            <table class = "table table-striped table-hover border border-info rounded">
+              <h4 class = "p-3">マイリスト</h4>
               <thead>
                 <tr>
-                  <th>投稿者名</th>
-                  <th>タイトル</th>
-                  <th>本文</th>
+                  <th class = "col-6">投稿者名</th>
+                  <th class = "col-6">タイトル</th>
                 </tr>
               </thead>
               <tbody>
@@ -87,20 +84,18 @@
                         <%= favorite.post.title %>
                       <% end %>
                     </td>
-                    <td><%= favorite.post.body %></td>
                   </tr>
                 <% end %>
               </tbody>
             </table>
           </div>
            <!--ユーザーが参加したグループ一覧-->
-          <div class = "col-6 mx-auto text-center">
-            <table>
-              <h4>マイグループ</h4>
+          <div class = "col-5 text-center">
+            <table class = "table table-striped table-hover border border-info rounded">
+              <h4 class = "p-3">マイグループ</h4>
               <thead>
                 <tr>
                   <th>グループ名</th>
-                  <th>説明</th>
                 </tr>
               </thead>
               <tbody>
@@ -111,7 +106,6 @@
                         <%= group.group.name %>
                       <% end %>
                     </td>
-                    <td><%= group.group.introduction %></td>
                   </tr>
                 <% end %>
               </tbody>

@@ -16,11 +16,10 @@
       <% @posts.each do |post| %>
         <tr>
           <td><%= link_to post.title, public_post_path(post) %></td>
-          <td><%= post.body %></td>
           <td>
-          <% post.tags.each do |tag| %>
-            <li style="list-style: none;"><%= link_to tag.name, public_search_path(word: tag.name, range:"Tag", search: "perfect_match") %></li>
-          <% end %>
+            <% post.tags.each do |tag| %>
+              <li style="list-style: none;"><%= link_to tag.name, public_search_path(word: tag.name, range:"Tag", search: "perfect_match") %></li>
+            <% end %>
           </td>
         </tr>
       <% end %>

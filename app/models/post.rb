@@ -10,7 +10,7 @@ class Post < ApplicationRecord
   has_one_attached :post_image, dependent: :destroy
   
   validates :title, length: { minimum: 2, maximum: 20 }, presence: true
-  validates :body, length: { maximum: 200 }, presence: true
+  validates :body, presence: true
 
   def get_post_image(width, height)
     unless post_image.attached?

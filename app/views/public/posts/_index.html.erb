@@ -7,16 +7,16 @@
       <% end %>
       <div class="card-body">
         <div class="row">
-          <div class="col-2">
-            <p>これはユーザー画像：<%= link_to image_tag(post.user.get_profile_image(50,50), class: "rounded-circle"), public_user_path(post.user) %></p>
+          <div class="col-3">
+            <p><%= link_to image_tag(post.user.get_profile_image(50,50), class: "rounded-circle"), public_user_path(post.user) %></p>
+            <span><i class="fas fa-user"></i><%= post.user.name %></span>
           </div>
-          <div class="col-10">
+          <div class="col-9">
+            <p id="fav_<%= post.id %>"><%= render "public/favorites/fav", post: post %></p>
             <p class="card-title">タイトル</p>
             <p class="card-text"><%= link_to post.title, public_post_path(post) %></p>
-            <p id="fav_<%= post.id %>"><%= render "public/favorites/fav", post: post %></p>
             <p class="card-title">説明</p>
             <p class="card-text"><%= post.body %></p>
-            <p class="card-text"><span><i class="fas fa-user"></i><%= post.user.name %></span></p>
             <% post.tags.each do |tag| %>
               <li style="list-style: none;"><%= link_to tag.name, public_search_path(word: tag.name, range:"Tag", search: "perfect_match") %></li>
             <% end %>
