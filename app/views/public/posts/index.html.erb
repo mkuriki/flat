@@ -17,5 +17,6 @@
     </div>
     <!--投稿一覧-->
       <%= render "public/posts/index", posts: @posts %>
+      <div class = "text-center m-3"<%= paginate @posts %></div>
   </div>
 </div>
