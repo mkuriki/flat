@@ -1,0 +1,14 @@
+ja:
+  activerecord:
+    models:
+      post: 投稿
+    attributes:
+      post:
+        title: タイトルが空白です
+        body: 本文が空白です
+    models:
+      group: グループ
+    attributes:
+      group:
+        name: グループ名が空白です
+        introduction: 説明文が空白です

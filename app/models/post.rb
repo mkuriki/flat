@@ -9,7 +9,7 @@ class Post < ApplicationRecord
   
   has_one_attached :post_image, dependent: :destroy
   
-  validates :title, length: { minimum: 2, maximum: 20 }, presence: true
+  validates :title, length: { maximum: 20 }, presence: true
   validates :body, presence: true
 
   def get_post_image(width, height)
@@ -32,12 +32,12 @@ class Post < ApplicationRecord
     # 今回保存されたものと現在の差を新しいタグとする。新しいタグは保存
     new_tags = savepost_tags - current_tags
 		
-    # Destroy old taggings:
+    # 古いタグを消す
     old_tags.each do |old_name|
       self.tags.delete Tag.find_by(name:old_name)
     end
 		
-    # Create new taggings:
+     # 新しいタグを保存
     new_tags.each do |new_name|
       post_tag = Tag.find_or_create_by(name:new_name)
       # 配列に保存

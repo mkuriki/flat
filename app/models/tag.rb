@@ -14,8 +14,7 @@ class Tag < ApplicationRecord
     else
       @tag = Tag.all
     end
-
-     return @tag.inject(init = []) {|result, tag| result + tag.posts}
-
+    return @tag.inject(init = []) {|result, tag| result + tag.posts}
   end
+  
 end

@@ -13,15 +13,16 @@
       <%= f.file_field :post_image, accept: "image/*" %>
       <div class = form-group>
         <label for="post_title">タイトル</label>
-        <%= f.text_field :title, class: "form-control post_title" %>
+        <%= f.text_field :title, class: "form-control post_title"%>
+        <p>（最大２０文字まで）</p>
       </div>
       <div class = form-group>
         <label for="post_body">詳細</label>
-        <%= f.text_area :body, class: "form-control post_body" %>
+        <%= f.text_area :body, class: "form-control post_body"%>
       </div>
       <div class="form-group">
         <label for="post_tag">タグ</label>
-        <%= f.text_field :tag_name, class: 'form-control post_tag' %>
+        <%= f.text_field :tag_name, class: 'form-control post_tag', placeholder: "カンマ（,）をつけて複数のタグをつけられるよ"  %>
       </div> 
       <div class = form-group>
         <%= f.submit '投稿する', class: "btn btn-sm btn-success" %>
