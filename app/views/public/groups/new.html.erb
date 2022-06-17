@@ -1,6 +1,15 @@
 <div container>
     <div = row>
       <div class = "col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+        <% if @post.errors.any? %>
+             <%= @post.errors.count %>errors prohibited this obj from being saved: 
+             <ul>
+             <% @post.errors.full_messages.each do |message| %>
+             <li><%= message %></li>
+             <% end %>
+             </ul>
+        <% end %>         
+        
         <h2 class="mt-3">新規グループ</h2>
         <%= form_with model:[@group], url: public_post_groups_path(@post, @group), local: true do |f| %>
           <div class = form-group>

@@ -15,13 +15,13 @@ class Public::PostsController < ApplicationController
       flash[:notice] = "You have created post successfully."
     else
       @posts = Post.all
-      render :index
+      render :new
     end
   end
 
   def index
     @posts = Post.all
-    @tag_list=Tag.all
+    @tag_list = Tag.all
   end
 
   def show
@@ -62,6 +62,6 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, :post_image, tag_ids: [])
+    params.require(:post).permit(:title, :body, :post_image, :tag_name, tag_ids: [])
   end
 end

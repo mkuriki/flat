@@ -1,4 +1,13 @@
 <div class="container">
+    <% if @post.errors.any? %>
+     <%= @post.errors.count %>errors prohibited this obj from being saved: 
+     <ul>
+     <% @post.errors.full_messages.each do |message| %>
+     <li><%= message %></li>
+     <% end %>
+     </ul>
+    <% end %> 
+    
     <%= form_with model:[:public, @post], local: true do |f| %>
       <h3 class = "m-3">投稿する</h3>
       <%= f.file_field :post_image, accept: "image/*" %>

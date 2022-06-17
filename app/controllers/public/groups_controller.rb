@@ -1,5 +1,4 @@
 class Public::GroupsController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def new
@@ -16,7 +15,7 @@ class Public::GroupsController < ApplicationController
       redirect_to public_post_group_path(@post, @group)
       flash[:notice] = "You have created group successfully."
     else
-      render  :new
+      render :new
     end
   end
 
