@@ -6,9 +6,12 @@ ja:
       post:
         title: タイトルが空白です
         body: 本文が空白です
+ja:
+  activerecord:
     models:
-      group: グループ
+      group: 投稿
     attributes:
       group:
-        name: グループ名が空白です
-        introduction: 説明文が空白です
+        name: タイトルが空白です
+        introduction: 本文が空白です
+

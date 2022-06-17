@@ -1,5 +1,5 @@
 class Group < ApplicationRecord
-    belongs_to :post
+    belongs_to :post, dependent: :destroy
     
     has_many :group_users
     has_many :users, through: :group_users

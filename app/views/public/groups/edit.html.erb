@@ -27,7 +27,7 @@
               <%= f.file_field :group_image, placeholder: "グループ画像", accept: "image/*", class: "form-control-file group_image" %>
             </div>
             <div class = "form-group">
-                <%= f.submit "更新する",url:public_post_group_path(@post, @group), method: :patch, class: "btn btn-success"  %>
+                <%= f.submit "更新する", url:public_post_group_path(@post, @group), method: :patch, class: "btn btn-success"  %>
             </div>
             <%= link_to "投稿詳細ページへ戻る", public_post_path(@post) %>
           <% end %>

@@ -24,4 +24,15 @@ class Admin::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+  
+  #サインイン後の変遷先
+  #管理のユーザー一覧へ
+  def after_sign_in_path_for(resource)
+    admin_users_path
+  end
+  #サインアウト後の変遷先
+  #管理ログインへ
+  def after_sign_out_path_for(resource)
+    new_admin_session_path
+  end
 end

@@ -49,6 +49,7 @@ Rails.application.routes.draw do
       resources :post_comments, only: [:create, :destroy]
       #グループ機能
       resources :groups do
+        post 'groups/' => 'groups#create', as: 'creategroup'
         resource :group_users, only: [:create, :destroy]
       end
     end

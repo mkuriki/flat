@@ -26,6 +26,17 @@ class Public::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
   
+  #サインイン後の変遷先
+  #ユーザーマイページへ
+  def after_sign_in_path_for(resource)
+    public_user_path(resource)
+  end
+  #サインアウト後の変遷先
+  #ユーザーログインへ
+  def after_sign_out_path_for(resource)
+    new_user_session_path
+  end
+  
   protected
   
   # 退会しているかを判断するメソッド
