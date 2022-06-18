@@ -2,8 +2,8 @@ class Admin::GroupsController < ApplicationController
   before_action :authenticate_admin!
 
   def show
-    @post = Post.find(params[:post_id])
     @group = Group.find(params[:id])
+    @post = Post.find(params[:post_id])
   end
 
   def edit

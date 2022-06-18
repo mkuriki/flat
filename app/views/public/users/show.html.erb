@@ -99,11 +99,11 @@
                 </tr>
               </thead>
               <tbody>
-                <% @groups.each do |group| %>
+                <% @mygroups.each do |mygroup| %>
                   <tr>
                     <td>
-                      <%= link_to public_post_group_path(group.group.post.id, group) do %>
-                        <%= group.group.name %>
+                      <%= link_to public_post_group_path(mygroup.group.post, mygroup.group) do %>
+                        <%= mygroup.group.name %>
                       <% end %>
                     </td>
                   </tr>

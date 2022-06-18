@@ -30,7 +30,7 @@
                   <% if (user_signed_in? || admin_signed_in?) && @group.owner_id == current_user.id %>
                    <%= link_to 'グループ編集', edit_public_post_group_path(@post, @group), class: "btn btn-sm btn-success ml-3" %>
                   <% end %>
-                  <%= link_to '投稿詳細へ戻る', public_post_path(@post), class: "ml-3" %>
+                  <%= link_to '投稿詳細へ', public_post_path(@post), class: "ml-3" %>
                 </td>
             </tr>
         </tbody>
