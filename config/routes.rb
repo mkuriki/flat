@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   #生成したコントローラーがどこに存在するかを記述, 不要なルーティングを削除
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
@@ -8,13 +8,13 @@ Rails.application.routes.draw do
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }
-  
+
   #ゲスト側
   devise_scope :user do
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
-  
-  
+
+
   root to: 'public/homes#top'
   get "public/about" => 'public/homes#about'
 
@@ -49,17 +49,16 @@ Rails.application.routes.draw do
       resources :post_comments, only: [:create, :destroy]
       #グループ機能
       resources :groups do
-        post 'groups/' => 'groups#create', as: 'creategroup'
         resource :group_users, only: [:create, :destroy]
       end
     end
-    
+
     #検索
     get "search" => 'searches#search'
     get "search_tag"=>"posts#search_tag"
   end
 
-  
+
 
 
 

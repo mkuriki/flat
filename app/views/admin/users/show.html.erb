@@ -28,10 +28,6 @@
                     <td><%= @user.phone_number %></td>
                 </tr>
                 <tr>
-                    <td>パスワード</td>
-                    <td><%= @user.encrypted_password %></td>
-                </tr>
-                <tr>
                     <td>会員ステータス</td>
                     <td><%= @user.is_deleted ? "退会" : "有効" %></td>
                 </tr>

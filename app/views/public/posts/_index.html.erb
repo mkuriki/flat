@@ -1,15 +1,17 @@
 <!--投稿一覧-->
-<div class="card-list-container py-5">
+<div class="card-list-container  py-5">
   <% posts.each do |post| %>
-    <div class="card w-50 mx-auto mt-4 shadow-lg">
-      <%= link_to public_post_path(post.id) do %>
-        <%= image_tag post.get_post_image(200,200), class: "image-top" %>
-      <% end %>
+    <div class="card w-60 mx-auto mt-4 shadow-lg">
+      <div class= "text-center m-3">
+        <%= link_to public_post_path(post) do %>
+          <%= image_tag post.get_post_image(300,300), class: "image-top" %>
+        <% end %>
+      </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-3">
+          <div class="col-3 text-center">
             <p><%= link_to image_tag(post.user.get_profile_image(50,50), class: "rounded-circle"), public_user_path(post.user) %></p>
-            <span><i class="fas fa-user"></i><%= post.user.name %></span>
+            <span class = "d-flex flex-nowrap justify-content-center""><i class="fas fa-user"></i><%= post.user.name %></span>
           </div>
           <div class="col-9">
             <p id="fav_<%= post.id %>"><%= render "public/favorites/fav", post: post %></p>
