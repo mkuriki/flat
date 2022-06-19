@@ -12,3 +12,17 @@ body{
 p{
   overflow-wrap: break-word;
 }
+a {
+    text-decoration: none !important;
+    color: #660000;
+    transition: color .8s;
+}
+a:hover{
+    color: #3aacad;
+}
+
+.page-title{
+    font-family: 'Merriweather', serif;
+    color: #660000;
+    text-transform: uppercase;
+}

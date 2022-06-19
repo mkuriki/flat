@@ -1,14 +1,14 @@
 class Post < ApplicationRecord
-  belongs_to :user, dependent: :destroy
+  belongs_to :user
 
   has_many :favorites, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :groups, dependent: :destroy
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags, dependent: :destroy
-  
-  has_one_attached :post_image, dependent: :destroy
-  
+
+  has_one_attached :post_image#, dependent: :destroy
+
   validates :title, length: { maximum: 20 }, presence: true
   validates :body, presence: true
 
@@ -23,7 +23,7 @@ class Post < ApplicationRecord
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
-  
+
   def save_tags(savepost_tags)
     # 現在のユーザーの持っているskillを引っ張ってきている
     current_tags = self.tags.pluck(:name) unless self.tags.nil?
@@ -31,12 +31,12 @@ class Post < ApplicationRecord
     old_tags = current_tags - savepost_tags
     # 今回保存されたものと現在の差を新しいタグとする。新しいタグは保存
     new_tags = savepost_tags - current_tags
-		
+
     # 古いタグを消す
     old_tags.each do |old_name|
       self.tags.delete Tag.find_by(name:old_name)
     end
-		
+
      # 新しいタグを保存
     new_tags.each do |new_name|
       post_tag = Tag.find_or_create_by(name:new_name)
@@ -44,7 +44,7 @@ class Post < ApplicationRecord
       self.tags << post_tag
     end
   end
-  
+
   # 検索方法分岐
   def self.search_for(search, word)
     if search == "perfect_match"

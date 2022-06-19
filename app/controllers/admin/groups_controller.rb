@@ -20,7 +20,7 @@ class Admin::GroupsController < ApplicationController
   def update
     if @group.update(group_params)
       @post = Post.find(params[:post_id])
-      redirect_to public_post_group_path(@post, @group)
+      redirect_to public_post_group_path(@post, @group), notice: "グループが更新されました"
     else
       render "edit"
     end

@@ -1,10 +1,13 @@
 <div class = "container text-center">
-   <p id="notice"></p>
+    <% if flash[:notice] %>
+     <div class="alert alert-success" role="alert">
+     <p class="notice text-center" style="color:green;"><%= flash[:notice] %></p></div>
+    <% end %>
     <div class = "m-5">
-      <%= image_tag @post.get_post_image(200,200) %>
+      <%= image_tag @post.get_post_image(200,200), class: "m-3" %>
       <h2><%= @post.title %></h2>
-      <h5>説明</h5>
-      <p><%= @post.body %></p>
+      <h5>詳細</h5>
+      <p><%= safe_join(@post.body.split("\n"),tag(:br)) %></p>
       <p class="comments_count">コメント数: <%= @post.post_comments.count %></p>
       <% @post.tags.each do |tag| %>
         <i class="fas fa-tag"></i><%= link_to tag.name, public_search_path(word: tag.name, range:"Tag", search: "perfect_match") %>

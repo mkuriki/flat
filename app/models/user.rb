@@ -12,6 +12,11 @@ class User < ApplicationRecord
 
   has_one_attached :profile_image, dependent: :destroy
   
+  validates :name, length: { maximum: 10 }, presence: true
+  validates :last_name, presence: true
+  validates :first_name, presence: true
+  validates :phone_number, length: { minimum: 10 }, presence: true
+  
   def self.guest
     find_or_create_by!(name: 'guestuser' ,email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64

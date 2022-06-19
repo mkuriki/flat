@@ -1,4 +1,8 @@
 <div class = "container text-center">
+  <% if flash[:notice] %>
+   <div class="alert alert-success" role="alert">
+   <p class="notice text-center" style="color:green;"><%= flash[:notice] %></p></div>
+  <% end %>
   <div class = "m-5">
     <%= image_tag @post.get_post_image(200,200) %>
     <p>タイトル：<%= @post.title %></p>

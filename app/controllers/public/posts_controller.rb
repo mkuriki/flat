@@ -11,8 +11,7 @@ class Public::PostsController < ApplicationController
     tag_list = params[:post][:tag_name].split(',')
     if @post.save
       @post.save_tags(tag_list)
-      redirect_to public_post_path(@post.id)
-      flash[:notice] = "You have created post successfully."
+      redirect_to public_post_path(@post.id), notice: "投稿が作成されました"
     else
       @posts = Post.all
       render :new
@@ -37,7 +36,7 @@ class Public::PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      redirect_to public_post_path(@post), notice: "You have updated post successfully."
+      redirect_to public_post_path(@post), notice: "投稿が更新されました"
     else
       render "edit"
     end
@@ -45,7 +44,7 @@ class Public::PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
-    @post.destroy
+    @post.destroy!
     redirect_to  public_posts_path
   end
 

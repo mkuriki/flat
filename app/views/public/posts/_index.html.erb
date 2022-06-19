@@ -17,8 +17,8 @@
             <p id="fav_<%= post.id %>"><%= render "public/favorites/fav", post: post %></p>
             <p class="card-title">タイトル</p>
             <p class="card-text"><%= link_to post.title, public_post_path(post) %></p>
-            <p class="card-title">説明</p>
-            <p class="card-text"><%= post.body %></p>
+            <p class="card-title">詳細</p>
+            <p class="card-text"><%= safe_join(post.body.split("\n"),tag(:br)) %></p>
             <% post.tags.each do |tag| %>
               <i class="fas fa-tag"></i><%= link_to tag.name, public_search_path(word: tag.name, range:"Tag", search: "perfect_match") %>
             <% end %>

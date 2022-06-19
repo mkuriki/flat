@@ -9,7 +9,8 @@
     <% end %> 
     
     <%= form_with model:[:public, @post], local: true do |f| %>
-      <h3 class = "m-3">投稿する</h3>
+      <h3 class = "m-3">投稿フォーム</h3>
+      <p>条件や集合日時を記載してみよう！</p>
       <%= f.file_field :post_image, accept: "image/*" %>
       <div class = form-group>
         <label for="post_title">タイトル</label>

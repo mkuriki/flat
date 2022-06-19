@@ -2,8 +2,12 @@ ja:
   activerecord:
     models:
       post: 投稿
+      group: グループ
     attributes:
       post:
         title: タイトルが空白です
         body: 本文が空白です
+      group: 
+        name: グループ名が空白です
+        introduction: グループ紹介文が空白です
 

@@ -12,15 +12,10 @@ class Public::GroupsController < ApplicationController
     @group.owner_id = current_user.id
     @group.post_id = @post.id
     if @group.save
-      redirect_to public_post_group_path(@post, @group)
-      flash[:notice] = "You have created group successfully."
+      redirect_to public_post_group_path(@post, @group), notice: "グループが作成されました"
     else
       render :new
     end
-  end
-
-  def index
-    @groups = Group.all
   end
 
   def show
@@ -34,17 +29,12 @@ class Public::GroupsController < ApplicationController
     @group.owner_id = current_user.id
   end
 
-  def destroy
-    @group = Group.find(params[:id])
-    @group.users.delete(current_user)
-    redirect_to public_post_path
-  end
-
   def update
     if @group.update(group_params)
       @post = Post.find(params[:post_id])
-      redirect_to public_post_group_path(@post, @group)
+      redirect_to public_post_group_path(@post, @group), notice: "グループが更新されました"
     else
+      @post = Post.find(params[:post_id])
       render "edit"
     end
   end

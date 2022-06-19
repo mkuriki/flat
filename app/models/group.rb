@@ -1,14 +1,17 @@
 class Group < ApplicationRecord
-    belongs_to :post, dependent: :destroy
-    
+    #アソシエーション
+    belongs_to :post#, dependent: :destroy
+
     has_many :group_users
     has_many :users, through: :group_users
-    
+
+    #一枚の画像添付
     has_one_attached :group_image
-    
-    validates :name, presence: true
+
+    #バリデーション
+    validates :name, length: { maximum: 20 }, presence: true
     validates :introduction, presence: true
-    
+
     #グループ画像
     def get_group_image(width, height)
     unless group_image.attached?
@@ -17,7 +20,7 @@ class Group < ApplicationRecord
     end
       group_image.variant(resize_to_limit: [width, height]).processed
     end
-    
+
     #ユーザーがグループ主であるかどうか
     def is_owned_by?(user)
       owner_id == user.id
