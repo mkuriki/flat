@@ -38,6 +38,12 @@ class Public::GroupsController < ApplicationController
       render "edit"
     end
   end
+  
+  def destroy
+    @group = Group.find(params[:id])
+    @group.users.delete(current_user)
+    redirect_to public_post_path
+  end
 
   private
 

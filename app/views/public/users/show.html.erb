@@ -1,22 +1,22 @@
 <div class = "container">
   <div class = "row">
-      <div class = "col-12">
-      <h2 class = "p-3">マイページ</h2>
-      <div class = "col-12 text-center"><%= image_tag @user.get_profile_image(100,100) %></div>
+    <div class = "col-12">
+    <h2 class = "p-3">マイページ</h2>
+    <div class = "col-12 text-center"><%= image_tag @user.get_profile_image(100,100) %></div>
       <table class="table">
           <tbody>
             <tr>
               <th class = "col-3">ニックネーム</th>
-              <th class = "col-3"><%= @user.name %></th>
+              <th class = "col-9"><%= @user.name %></th>
             </tr>
             <tr>
               <th class = "col-3">紹介文</th>
-              <th class = "col-3"><%= @user.introduction %></th>
+              <th class = "col-9"><%= @user.introduction %></th>
             </tr>
           </tbody>
       </table>
-      </div>
-
+    </div>
+    
     <div>
       <!--検索-->
       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalLong">
@@ -63,7 +63,6 @@
           <% end %>
           </div>
         </div>
-
         <div class = "d-flex justify-content-around">
           <!--ユーザーがいいねした投稿一覧-->
           <div class = "col-5 text-center">

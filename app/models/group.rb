@@ -2,7 +2,7 @@ class Group < ApplicationRecord
     #アソシエーション
     belongs_to :post#, dependent: :destroy
 
-    has_many :group_users
+    has_many :group_users, dependent: :destroy
     has_many :users, through: :group_users
 
     #一枚の画像添付

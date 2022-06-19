@@ -16,5 +16,5 @@ class Tag < ApplicationRecord
     end
     return @tag.inject(init = []) {|result, tag| result + tag.posts}
   end
-  
+
 end

@@ -1,13 +1,16 @@
 ja:
   activerecord:
+    errors:
+      messages:
+        record_invalid: "バリデーションに失敗しました: %{errors}"
     models:
       post: 投稿
       group: グループ
     attributes:
       post:
-        title: タイトルが空白です
-        body: 本文が空白です
+        title: タイトル
+        body: 本文
       group: 
-        name: グループ名が空白です
-        introduction: グループ紹介文が空白です
+        name: グループ名
+        introduction: グループ紹介文
 
