@@ -9,7 +9,7 @@
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+  <!--ヘッダー-->
   <body class="d-flex flex-column vh-100">
    <header class="shadow-sm">
     <nav class="navbar navbar-expand-lg navbar-light">
@@ -20,6 +20,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ml-auto">
+          <!--管理者（admin）-->
           <% if admin_signed_in? %>
             <li class="nav-item">
               <%= link_to "会員一覧", admin_users_path, class: 'nav-link text-dark' %>
@@ -32,6 +33,11 @@
               <i class="fas fa-sign-out-alt"></i> ログアウト
               <% end %>
             </li>
+            <div>
+            <!--検索フォーム-->
+            <%= render 'public/searches/text_form' %>
+            </div>
+          <!--会員ユーザー-->
           <% elsif user_signed_in? %>
             <li class="nav-item">
               <%= link_to public_posts_path, class: 'nav-link text-dark' do %>
@@ -48,7 +54,7 @@
               <i class="fas fa-sign-out-alt"></i> ログアウト
               <% end %>          
             </li>
-              <!--検索-->
+              <!--検索ボタン-->
               <li type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalLong">
                 <i class="fa fa-search"></i>
               </li>
@@ -66,7 +72,7 @@
                        <%= f.label :word, "投稿やユーザを検索"%>
                        <%= f.text_field :word, size: "50", placeholder: "検索" %>
                        <%= f.select :range, options_for_select([["投稿検索", 'Post'], ["ユーザー検索", 'User']]) %>
-                       <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backward_match"], ["部分一致","partial_match"]]) %>
+                       <%= f.select :search, options_for_select([["部分一致","partial_match"], ["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backward_match"]]) %>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
@@ -76,10 +82,8 @@
                   </div>
                 </div>
               </div>
+          <!--ゲスト、非会員-->
           <% else %>
-            <li class="nav-item">
-              <%= link_to "TOP", public_root_path, class: 'nav-link text-dark' %>
-            </li>
             <li class="nav-item">
               <%= link_to  public_about_path, class: 'nav-link text-dark' do %>
               <i class="fas fa-link"></i> サイトについて
@@ -104,6 +108,7 @@
     <main>
     <%= yield %>
     </main>
+    <!--フッター-->
     <footer class="bg-dark text-white pt-5 pb-4">
           <div class="container">
             <div class="row no-gutters">

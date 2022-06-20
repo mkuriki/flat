@@ -2,8 +2,8 @@ class Public::UsersController < ApplicationController
   before_action :authenticate_user!, only: [:show, :update, :edit]
   before_action :correct_user, only: [:withdraw, :edit, :update]
   before_action :ensure_guest_user, only: [:edit]
-  
-  
+
+
   def show
     @user = User.find(params[:id])
     @posts = Post.where(user_id: current_user.id)
@@ -17,15 +17,14 @@ class Public::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    
+
     if @user.update(user_params)
-      redirect_to public_user_path(@user)
-      flash[:notice] = "User was successfully updated."
+      redirect_to public_user_path(@user), notice: "プロフィールが更新されました"
     else
       render :edit
     end
   end
-  
+
   def show_withdraw
     @user = User.find(params[:id])
   end
@@ -38,9 +37,9 @@ class Public::UsersController < ApplicationController
       redirect_to root_path
     end
   end
-  
+
   private
-  
+
   # ユーザーデータのストロングパラメータ
   def user_params
     params.require(:user).permit(:name, :introduction, :profile_image)
@@ -56,7 +55,7 @@ class Public::UsersController < ApplicationController
     if @user.name == "guestuser"
       redirect_to user_path(current_user) , notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
     end
-  end  
+  end
 end
-  
+
 

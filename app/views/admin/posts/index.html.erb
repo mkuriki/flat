@@ -1,29 +1,27 @@
-<!--投稿一覧-->
-<div class="card-list-container py-5">
-  <% @posts.each do |post| %>
-    <div class="card w-50 mx-auto mt-4 shadow-lg">
-      <%= link_to admin_post_path(post.id) do %>
-        <%= image_tag post.get_post_image(200,200) %>
-      <% end %>
-      <div class="card-body">
-        <div class="row">
-          <div class="col-2">
-            <p>これはユーザー画像：<%= link_to image_tag(post.user.get_profile_image(50,50), class: "rounded-circle"), admin_user_path(post.user) %></p>
+<div class="continer">
+  <!--投稿一覧-->
+  <h4 class = "text-center m-3">投稿一覧</h4>
+  <div class="card-list-container  py-5">
+    <% @posts.each do |post| %>
+      <div class="card w-60 mx-auto mt-4 shadow-lg">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-3 text-center">
+              <p><%= link_to image_tag(post.user.get_profile_image(50,50), class: "rounded-circle"), admin_user_path(post.user) %></p>
+              <span class = "d-flex flex-nowrap justify-content-center"><i class="fas fa-user"></i><%= post.user.name %></span>
+            </div>
+            <div class="col-9">
+              <p class="card-title">タイトル</p>
+              <p class="card-text"><%= link_to post.title, admin_post_path(post) %></p>
+              <p class="card-title">詳細</p>
+              <p class="card-text"><%= safe_join(post.body.split("\n"),tag(:br)) %></p>
+              <% post.tags.each do |tag| %>
+                <i class="fas fa-tag"></i><%= link_to tag.name, public_search_path(word: tag.name, range:"Tag", search: "perfect_match") %>
+              <% end %>
+            </div>                
           </div>
-          <div class="col-10">
-            <p class="card-title">タイトル</p>
-            <p class="card-text"><%= link_to post.title, admin_post_path(post) %></p>
-            <p id="fav_<%= post.id %>"><%= render "public/favorites/fav", post: post %></p>
-            <p class="card-title">説明</p>
-            <p class="card-text"><%= post.body %></p>
-            <p class="card-text"><span><i class="fas fa-user"></i><%= post.user.name %></span></p>
-            <% post.tags.each do |tag| %>
-              <li style="list-style: none;"><%= link_to tag.name, public_search_path(word: tag.name, range:"Tag", search: "perfect_match") %></li>
-            <% end %>
-          </div>                
         </div>
       </div>
-    </div>
-  <% end %>
-  <div class = "m-3 text-center"><%= paginate @posts %></div>
+    <% end %>
+  </div>
 </div>

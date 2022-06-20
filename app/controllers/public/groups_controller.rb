@@ -1,4 +1,5 @@
 class Public::GroupsController < ApplicationController
+  before_action :authenticate_user!
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def new
@@ -38,19 +39,14 @@ class Public::GroupsController < ApplicationController
       render "edit"
     end
   end
-  
-  def destroy
-    @group = Group.find(params[:id])
-    @group.users.delete(current_user)
-    redirect_to public_post_path
-  end
 
   private
 
+  #グループ作成のストロングパラメータ
   def group_params
     params.require(:group).permit(:name, :introduction, :group_image)
   end
-
+  #ユーザーがグループ作成者かどうかの判定
   def ensure_correct_user
     @group = Group.find(params[:id])
     unless @group.owner_id == current_user.id

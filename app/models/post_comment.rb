@@ -1,6 +1,8 @@
 class PostComment < ApplicationRecord
-  belongs_to :user#, dependent: :destroy
-  belongs_to :post#, dependent: :destroy
-
+  #アソシエーション
+  belongs_to :user
+  belongs_to :post
+  
+  #バリデーション
   validates :comment, presence: true
 end

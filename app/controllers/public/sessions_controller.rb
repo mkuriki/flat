@@ -27,12 +27,10 @@ class Public::SessionsController < Devise::SessionsController
   # end
   
   #サインイン後の変遷先
-  #ユーザーマイページへ
   def after_sign_in_path_for(resource)
     public_user_path(resource)
   end
   #サインアウト後の変遷先
-  #ユーザーログインへ
   def after_sign_out_path_for(resource)
     new_user_session_path
   end
@@ -41,11 +39,12 @@ class Public::SessionsController < Devise::SessionsController
   
   # 退会しているかを判断するメソッド
     def user_state
-      ## 【処理内容1】 入力されたemailからアカウントを1件取得
+      ## 入力されたemailからアカウントを1件取得
       @user = User.find_by(email: params[:user][:email])
       ## アカウントを取得できなかった場合、このメソッドを終了する
       return if !@user
-      if (@user.valid_password?(params[:user][:password])) && (@user.is_deleted == true)
+      ## 取得したアカウントのパスワードと入力されたパスワードが一致していて退会済みの場合、新規登録ページへ遷移
+      if (@user.valid_password?(params[:user][:password])) && (@user.is_deleted?)
         redirect_to new_user_registration_path
       end
     end

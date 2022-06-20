@@ -38,7 +38,7 @@ class Public::PostsController < ApplicationController
     if @post.update(post_params)
       redirect_to public_post_path(@post), notice: "投稿が更新されました"
     else
-      render "edit"
+      render :edit
     end
   end
 
@@ -57,9 +57,9 @@ class Public::PostsController < ApplicationController
     @posts = @tag.posts
   end
 
-  # 投稿データのストロングパラメータ
   private
 
+  # 投稿データのストロングパラメータ
   def post_params
     params.require(:post).permit(:title, :body, :post_image, :tag_name, tag_ids: [])
   end

@@ -4,19 +4,23 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  #アソシエーション
   has_many :posts, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :group_users
   has_many :groups, through: :group_users
-
+  
+  #一枚の画像添付
   has_one_attached :profile_image, dependent: :destroy
   
+  #バリデーション
   validates :name, length: { maximum: 10 }, presence: true
   validates :last_name, presence: true
   validates :first_name, presence: true
   validates :phone_number, length: { minimum: 10 }, presence: true
   
+  #ゲストユーザ－作成
   def self.guest
     find_or_create_by!(name: 'guestuser' ,email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
@@ -38,13 +42,13 @@ class User < ApplicationRecord
 
   # 検索方法分岐
   def self.search_for(search, word)
-    if search == "perfect_match"
+    if search == "perfect_match"#完全一致
       @user = User.where("name LIKE?", "#{word}")
-    elsif search == "forward_match"
+    elsif search == "forward_match"#前方一致
       @user = User.where("name LIKE?","#{word}%")
-    elsif search == "backward_match"
+    elsif search == "backward_match"#後方一致
       @user = User.where("name LIKE?","%#{word}")
-    elsif search == "partial_match"
+    elsif search == "partial_match"#部分一致
       @user = User.where("name LIKE?","%#{word}%")
     else
       @user = User.all

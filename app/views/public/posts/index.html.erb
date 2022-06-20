@@ -2,12 +2,13 @@
   <div class="mb-auto">
     <div class = "mt-3">
       <!--検索フォーム-->
-        <%= render 'public/searches/form' %>
+      <%= render 'public/searches/text_form' %>
+      <%= render 'public/searches/tag_form' %>
       <!--タグリスト-->
-        <% @tag_list.each do |list|%>
-        <%=link_to list.name, public_search_tag_path(tag_id: list.id) %>
-        <%="(#{list.posts.count})" %>
-        <% end %>
+      <% @tag_list.each do |list|%>
+      <%=link_to list.name, public_search_tag_path(tag_id: list.id) %>
+      <%="(#{list.posts.count})" %>
+      <% end %>
     </div>
     <!--新規投稿-->
     <div class = "text-center mt-5">
@@ -16,7 +17,7 @@
       <% end %>
     </div>
     <!--投稿一覧-->
-      <%= render "public/posts/index", posts: @posts %>
-      <div class = "text-center m-3"><%= paginate @posts %></div>
+    <%= render "public/posts/index", posts: @posts %>
+    <div class = "text-center m-3"><%= paginate @posts %></div>
   </div>
 </div>

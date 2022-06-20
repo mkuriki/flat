@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
+  #アソシエーション
   belongs_to :user
 
   has_many :favorites, dependent: :destroy
@@ -7,12 +8,15 @@ class Post < ApplicationRecord
   has_many :group_users, through: :groups, dependent: :destroy
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags, dependent: :destroy
-
-  has_one_attached :post_image#, dependent: :destroy
-
+  
+  #一枚の画像添付
+  has_one_attached :post_image
+  
+  #バリデーション
   validates :title, length: { maximum: 20 }, presence: true
   validates :body, presence: true
-
+  
+  #投稿画像添付
   def get_post_image(width, height)
     unless post_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
@@ -20,7 +24,8 @@ class Post < ApplicationRecord
     end
       post_image.variant(resize_to_limit: [width, height]).processed
   end
-
+  
+  #いいねがされているかの確認
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
@@ -48,13 +53,13 @@ class Post < ApplicationRecord
 
   # 検索方法分岐
   def self.search_for(search, word)
-    if search == "perfect_match"
+    if search == "perfect_match" #完全一致
       @post = Post.where("title LIKE?","#{word}")
-    elsif search == "forward_match"
+    elsif search == "forward_match"#前方一致
       @post = Post.where("title LIKE?","#{word}%")
-    elsif search == "backward_match"
+    elsif search == "backward_match"#後方一致
       @post = Post.where("title LIKE?","%#{word}")
-    elsif search == "partial_match"
+    elsif search == "partial_match"#部分一致
       @post = Post.where("title LIKE?","%#{word}%")
     else
       @post = Post.all

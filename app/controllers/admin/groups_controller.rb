@@ -11,19 +11,22 @@ class Admin::GroupsController < ApplicationController
     @post = Post.find(params[:post_id])
   end
 
-  def destroy
-    @group = Group.find(params[:id])
-    @group.delete
-    redirect_to request.referer
-  end
-
   def update
+      @group = Group.find(params[:id])
     if @group.update(group_params)
       @post = Post.find(params[:post_id])
-      redirect_to public_post_group_path(@post, @group), notice: "グループが更新されました"
+      redirect_to admin_post_group_path(@post, @group), notice: "グループが更新されました"
     else
+      @post = Post.find(params[:post_id])
       render "edit"
     end
+  end
+  
+  private
+  
+  #グループ更新のストロングパラメータ
+  def group_params
+    params.require(:group).permit(:name, :introduction, :group_image)
   end
 
 end

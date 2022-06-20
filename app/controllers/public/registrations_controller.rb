@@ -60,11 +60,12 @@ class Public::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
   before_action :configure_permitted_parameters, if: :devise_controller?
-
+  
+  #サインアップ後の遷移
   def after_sign_up_path_for(resource)
     public_user_path(resource)
   end
-
+  #新規登録時に許可するデータ
   def configure_permitted_parameters
    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :last_name, :first_name, :phone_number])
   end
