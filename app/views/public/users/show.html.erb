@@ -1,3 +1,9 @@
+<% if flash[:notice] %>
+ <div class="alert alert-success col-12" role="alert">
+ <p class="notice text-center" style="color:green;"><%= flash[:notice] %></p>
+ </div>
+<% end %>
+
 <div class = "container">
   <div class = "row">
     <div class = "col-12">
@@ -16,105 +22,72 @@
           </tbody>
       </table>
     </div>
-    
-    <div>
-      <!--検索-->
-      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalLong">
-        <i class="fa fa-search"></i>
-      </button>
-      <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">検索</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <%= form_with url: public_search_path, method: :get, local: true do |f| %>
-            <div class="modal-body">
-               <%= f.label :word, "投稿やユーザを検索"%>
-               <%= f.text_field :word, size: "50", placeholder: "検索" %>
-               <%= f.select :range, options_for_select([["投稿検索", 'Post'], ["ユーザー検索", 'User']]) %>
-               <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backward_match"], ["部分一致","partial_match"]]) %>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-              <%= button_tag '<i class="fa fa-search"></i>'.html_safe, :type => "submit", :class =>"btn btn-success" %>
-            </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-
       <!--閲覧権限_ログインユーザーのみ閲覧可能-->
-      <% if @user == current_user %>
-
-      <div class = "col-12 ">
-        <div>
-          <div class = "text-center mb-3">
-          <!--ユーザーの名前がguestuserである場合には、表示しません-->
-          <% if @user.name != "guestuser" %>
-            <!--ユーザー情報編集-->
-            <%= link_to edit_public_user_path(@user), class: "btn btn-outline-secondary btn-lg ml-3" do %>
-              <i class="fas fa-user-cog"></i>　プロフィールを編集
-            <% end %>
+    <% if @user == current_user %>
+    <div class = "col-12 ">
+      <div>
+        <div class = "text-center mb-3">
+        <!--ユーザーの名前がguestuserである場合には、表示しません-->
+        <% if @user.name != "guestuser" %>
+          <!--ユーザー情報編集-->
+          <%= link_to edit_public_user_path(@user), class: "btn btn-outline-secondary mx-auto col-12" do %>
+            <i class="fas fa-user-cog"></i>　プロフィールを編集
           <% end %>
-          </div>
+        <% end %>
         </div>
-        <div class = "d-flex justify-content-around">
-          <!--ユーザーがいいねした投稿一覧-->
-          <div class = "col-5 text-center">
-            <table class = "table table-striped table-hover border border-info rounded">
-              <h4 class = "p-3">マイリスト</h4>
-              <thead>
-                <tr>
-                  <th class = "col-6">投稿者名</th>
-                  <th class = "col-6">タイトル</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @favorites.each do |favorite| %>
-                  <tr>
-                    <td><%= favorite.post.user.name %></td>
-                    <td>
-                      <%= link_to public_post_path(favorite.post) do %>
-                        <%= favorite.post.title %>
-                      <% end %>
-                    </td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-           <!--ユーザーが参加したグループ一覧-->
-          <div class = "col-5 text-center">
-            <table class = "table table-striped table-hover border border-info rounded">
-              <h4 class = "p-3">マイグループ</h4>
-              <thead>
-                <tr>
-                  <th>グループ名</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @mygroups.each do |mygroup| %>
-                  <tr>
-                    <td>
-                      <%= link_to public_post_group_path(mygroup.group.post, mygroup.group) do %>
-                        <%= mygroup.group.name %>
-                      <% end %>
-                    </td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <!--ユーザーの投稿一覧-->
-        <h4 class = "text-center mt-5">マイポスト</h4>
-        <%= render "public/posts/index", posts: @posts %>
       </div>
-      <% end %>
+      <div class = "row justify-content-around">
+        <!--ユーザーがいいねした投稿一覧-->
+        <div class = "col-md-5 col-sm-12 text-center">
+          <table class = "table table-striped table-hover border border-info rounded">
+            <h4 class = "p-3">マイリスト</h4>
+            <thead>
+              <tr>
+                <th class = "col-6">投稿者名</th>
+                <th class = "col-6">タイトル</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @favorites.each do |favorite| %>
+                <tr>
+                  <td><%= favorite.post.user.name %></td>
+                  <td>
+                    <%= link_to public_post_path(favorite.post) do %>
+                      <%= favorite.post.title %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+         <!--ユーザーが参加したグループ一覧-->
+        <div class = "col-md-5 col-sm-12 text-center">
+          <table class = "table table-striped table-hover border border-info rounded">
+            <h4 class = "p-3">マイグループ</h4>
+            <thead>
+              <tr>
+                <th>グループ名</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @mygroups.each do |mygroup| %>
+                <tr>
+                  <td>
+                    <%= link_to public_post_group_path(mygroup.group.post, mygroup.group) do %>
+                      <%= mygroup.group.name %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!--ユーザーの投稿一覧-->
+      <h4 class = "text-center mt-5">マイポスト</h4>
+      <%= render "public/posts/index", posts: @posts %>
     </div>
+    <% end %>
+  </div>
 </div>

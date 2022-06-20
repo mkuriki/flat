@@ -34,9 +34,6 @@
             </li>
           <% elsif user_signed_in? %>
             <li class="nav-item">
-              <%= link_to "TOP", public_root_path, class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
               <%= link_to public_posts_path, class: 'nav-link text-dark' do %>
               <i class="far fa-flag"></i> 投稿一覧
               <% end %>
@@ -51,6 +48,34 @@
               <i class="fas fa-sign-out-alt"></i> ログアウト
               <% end %>          
             </li>
+              <!--検索-->
+              <li type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalLong">
+                <i class="fa fa-search"></i>
+              </li>
+              <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">検索</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <%= form_with url: public_search_path, method: :get, local: true do |f| %>
+                    <div class="modal-body">
+                       <%= f.label :word, "投稿やユーザを検索"%>
+                       <%= f.text_field :word, size: "50", placeholder: "検索" %>
+                       <%= f.select :range, options_for_select([["投稿検索", 'Post'], ["ユーザー検索", 'User']]) %>
+                       <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backward_match"], ["部分一致","partial_match"]]) %>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                      <%= button_tag '<i class="fa fa-search"></i>'.html_safe, :type => "submit", :class =>"btn btn-info" %>
+                    </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
           <% else %>
             <li class="nav-item">
               <%= link_to "TOP", public_root_path, class: 'nav-link text-dark' %>
