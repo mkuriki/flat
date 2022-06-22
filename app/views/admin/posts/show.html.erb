@@ -17,27 +17,27 @@
 
   <h3 class = "m-3">グループ</h3>
   <table class = "table table-hover">
-     <thead>
-      <tr>
+    <thead>
+     <tr>
         <th>グループ画像</th>
         <th>グループ名</th>
         <th>紹介文</th>
         <th>人数</th>
-      </tr>
-     </thead>
-     <body>
-      <% @groups.each do |group| %>
-        <tr>
-          <td><%= image_tag group.get_group_image(50,50) %></td>
-          <td><%= link_to group.name, admin_post_group_path(@post, group) %></td>
-          <td><%= group.introduction %></td>
-          <td><%= group.users.count %></td>
-          <div class = "m-3">
-            <td><%= link_to "グループ編集", edit_admin_post_group_path(@post, group), class: "btn btn-sm btn-success edit_group" %></td>
-          </div>
-        </tr>
-      <% end %>
-     </body>
+     </tr>
+    </thead>
+    <body>
+     <% @groups.each do |group| %>
+       <tr>
+         <td><%= image_tag group.get_group_image(50,50) %></td>
+         <td><%= link_to group.name, admin_post_group_path(@post, group) %></td>
+         <td><%= group.introduction %></td>
+         <td><%= group.users.count %></td>
+         <div class = "m-3">
+           <td><%= link_to "グループ編集", edit_admin_post_group_path(@post, group), class: "btn btn-sm btn-success edit_group" %></td>
+         </div>
+       </tr>
+     <% end %>
+    </body>
   </table>
   <%= link_to "投稿編集", edit_admin_post_path(@post), class: "btn btn-sm btn-success edit_post mb-3" %>
   <%= link_to "投稿削除", admin_post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger ml-3 mb-3 destroy_post "  %>

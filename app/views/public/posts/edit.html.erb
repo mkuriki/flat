@@ -3,32 +3,33 @@
     <div class = "col-sm-12">
       <h3 class = "m-3">投稿編集</h3>
       <% if @post.errors.any? %>
-          <%= @post.errors.count %>errors prohibited this obj from being saved: 
-          <ul>
+        <%= @post.errors.count %>errors prohibited this obj from being saved: 
+        <ul>
           <% @post.errors.full_messages.each do |message| %>
           <li><%= message %></li>
           <% end %>
-          </ul>
-      <% end %>             
+        </ul>
+      <% end %>
+      
       <%= form_with model: @post,url: public_post_path do |f| %>
-      <div class="form-group">
-      <label for="post_title">タイトル</label>
-      <%= f.text_field :title, autofocus: true, placeholder: @post.title, class: "form-control post_title" %>
-      </div>
-      <div class = "form-group">
-      <label for="post_opinion">詳細</label>
-      <%= f.text_area :body, autofocus: true, class: "form-control post_body" %>
-      </div>
-      <div class = "form-group">
-      <label for="post_image">画像</label>
-      <%= f.file_field :post_image, accept: "image/*" %>
-      </div>
-      <div class = "form-group">
-      <%= f.submit "更新する", class: "btn btn-success"  %>
-      </div>
-      <%= link_to "戻る", public_post_path(@post) %>
-      <%= "|" %>
-      <%= link_to "投稿一覧へ", public_posts_path %>
+        <div class="form-group">
+          <label for="post_title">タイトル</label>
+          <%= f.text_field :title, autofocus: true, placeholder: @post.title, class: "form-control post_title" %>
+        </div>
+        <div class = "form-group">
+          <label for="post_opinion">詳細</label>
+          <%= f.text_area :body, autofocus: true, class: "form-control post_body" %>
+        </div>
+        <div class = "form-group">
+          <label for="post_image">画像</label>
+          <%= f.file_field :post_image, accept: "image/*" %>
+        </div>
+        <div class = "form-group">
+          <%= f.submit "更新する", class: "btn btn-success"  %>
+        </div>
+        <%= link_to "戻る", public_post_path(@post) %>
+        <%= "|" %>
+        <%= link_to "投稿一覧へ", public_posts_path %>
       <% end %>
     </div>
   </div>

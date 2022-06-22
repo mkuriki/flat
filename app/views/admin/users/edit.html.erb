@@ -6,14 +6,14 @@
     <% end %>
   </ul>
 <% end %>
+
 <%= form_with model: [:admin, @user] do |f| %>
   <div class = "container">
       <h4 class = "text-center m-3"><%= @user.name %>さんの会員情報編集</h4>
     <div class = "col-sm-6 mx-auto">
-      
       <div class = "row mb-2">
-            <label class = "col-sm-4">会員id</label>
-            <%= @user.id %>
+        <label class = "col-sm-4">会員id</label>
+        <%= @user.id %>
       </div>
       <div class = "row mb-2">
         <label class = "col-sm-4">氏名</label>
@@ -41,9 +41,8 @@
           </div>
       </div>
       <div class = "text-center mb-3">
-      <%= f.submit "編集内容を保存する", class: "btn btn-success mt-3 p-3" %>
+        <%= f.submit "編集内容を保存する", class: "btn btn-success mt-3 p-3" %>
       </div>
     </div>
   </div>
-
 <% end %>

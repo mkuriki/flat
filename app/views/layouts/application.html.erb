@@ -70,7 +70,7 @@
                     <%= form_with url: public_search_path, method: :get, local: true do |f| %>
                     <div class="modal-body">
                        <%= f.label :word, "投稿やユーザを検索"%>
-                       <%= f.text_field :word, size: "50", placeholder: "検索" %>
+                       <%= f.text_field :word, size: "50", placeholder: "目的地や観光地など" %>
                        <%= f.select :range, options_for_select([["投稿検索", 'Post'], ["ユーザー検索", 'User']]) %>
                        <%= f.select :search, options_for_select([["部分一致","partial_match"], ["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backward_match"]]) %>
                     </div>

@@ -1,5 +1,5 @@
-<div class="continer">
   <!--投稿一覧-->
+<div class="continer">
   <h4 class = "text-center m-3">投稿一覧</h4>
   <div class="card-list-container  py-5">
     <% @posts.each do |post| %>
@@ -18,7 +18,7 @@
               <% post.tags.each do |tag| %>
                 <i class="fas fa-tag"></i><%= link_to tag.name, public_search_path(word: tag.name, range:"Tag", search: "perfect_match") %>
               <% end %>
-            </div>                
+            </div>
           </div>
         </div>
       </div>

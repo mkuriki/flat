@@ -7,18 +7,18 @@
 <div class = "container">
   <div class = "row">
     <div class = "col-12">
-    <div class = "col-12 p-3 text-center"><%= image_tag @user.get_profile_image(100,100) %></div>
+      <div class = "col-12 p-3 text-center"><%= image_tag @user.get_profile_image(100,100) %></div>
       <table class="table">
-          <tbody>
-            <tr>
-              <th class = "col-3">ニックネーム</th>
-              <th class = "col-9"><%= @user.name %></th>
-            </tr>
-            <tr>
-              <th class = "col-3">紹介文</th>
-              <th class = "col-9"><%= @user.introduction %></th>
-            </tr>
-          </tbody>
+        <tbody>
+          <tr>
+            <th class = "col-3">ニックネーム</th>
+            <th class = "col-9"><%= @user.name %></th>
+          </tr>
+          <tr>
+            <th class = "col-3">紹介文</th>
+            <th class = "col-9"><%= @user.introduction %></th>
+          </tr>
+        </tbody>
       </table>
     </div>
       <!--閲覧権限_ログインユーザーのみ閲覧可能-->
