@@ -21,7 +21,7 @@
         <tr>
           <td><%= image_tag @group.get_group_image(50,50) %></td>
           <td><%= @group.name %></td>
-          <td><%= @group.introduction %></td>
+          <td><%= safe_join(@group.introduction.split("\n"),tag(:br)) %></td>
           <td>
             <% @group.users.each do |member| %>
             <li style="list-style: none;"><%= member.name %></li>

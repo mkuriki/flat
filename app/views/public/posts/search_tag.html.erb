@@ -2,10 +2,8 @@
   <h4>タグが<%=@tag.name%>の投稿一覧</h4>
   
   <!--タグリスト-->
-  <% @tag_list.each do |list|%>
-    <%=link_to list.name, public_search_tag_path(tag_id: list.id) %>
-    <%="(#{list.posts.count})" %>
-  <% end %>
+  <%= render 'public/posts/taglist', tag_list: @tag_list %>
+  <!--タグにもとずいた投稿一覧-->
   <% @posts.each do |post| %>
     <div class="card">
       <div class="card-body">

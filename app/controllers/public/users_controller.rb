@@ -1,6 +1,6 @@
 class Public::UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:show, :update, :edit]
-  before_action :correct_user, only: [:withdraw, :edit, :update]
+  before_action :authenticate_user!
+  before_action :ensure_correct_user, only: [:show_withdraw, :withdraw, :edit, :update]
   before_action :ensure_guest_user, only: [:edit]
 
 
@@ -45,15 +45,17 @@ class Public::UsersController < ApplicationController
     params.require(:user).permit(:name, :introduction, :profile_image)
   end
   # 特定のユーザーとログインユーザーの一致を確認
-  def correct_user
-  @user = User.find(params[:id])
-  redirect_to(public_user_path(current_user)) unless @user == current_user
+  def ensure_correct_user
+    @user = User.find(params[:id])
+    unless @user == current_user
+      redirect_to public_user_path(current_user)
+    end
   end
-  #ゲストユーザーの編集規制
+  #ゲストユーザーの編集規制（trueの場合編集画面へ遷移できない）
   def ensure_guest_user
     @user = User.find(params[:id])
     if @user.name == "guestuser"
-      redirect_to user_path(current_user) , notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
+      redirect_to user_path(current_user), notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
     end
   end
 end

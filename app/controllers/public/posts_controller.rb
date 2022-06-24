@@ -1,5 +1,6 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def new
     @post = Post.new
@@ -13,7 +14,7 @@ class Public::PostsController < ApplicationController
       @post.save_tags(tag_list)
       redirect_to public_post_path(@post.id), notice: "投稿が作成されました"
     else
-      @posts = Post.all
+      @posts = Post.page(params[:page])
       render :new
     end
   end
@@ -58,6 +59,13 @@ class Public::PostsController < ApplicationController
 
   # 投稿データのストロングパラメータ
   def post_params
-    params.require(:post).permit(:title, :body, :post_image, tag_ids: [])
+    params.require(:post).permit(:title, :body, :post_image, )
+  end
+   # 特定のユーザーとログインユーザーの一致を確認
+  def ensure_correct_user
+    @post = Post.find(params[:id])
+    unless @post.user == current_user
+      redirect_to public_posts_path
+    end
   end
 end

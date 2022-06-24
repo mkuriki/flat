@@ -25,11 +25,17 @@ class Post < ApplicationRecord
       post_image.variant(resize_to_limit: [width, height]).processed
   end
   
+  #ログインユーザーが投稿作成者か確認
+  def is_owned_by?(user)
+    self.user == user
+  end
+  
   #いいねがされているかの確認
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
-
+  
+  #タグの保存
   def save_tags(savepost_tags)
     current_tags = self.tags.pluck(:name) unless self.tags.nil?
     old_tags = current_tags - savepost_tags

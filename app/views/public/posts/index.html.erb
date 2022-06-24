@@ -5,10 +5,7 @@
       <%= render 'public/searches/text_form' %>
       <%= render 'public/searches/tag_form' %>
       <!--タグリスト-->
-      <% @tag_list.each do |list|%>
-      <%=link_to list.name, public_search_tag_path(tag_id: list.id) %>
-      <%="(#{list.posts.count})" %>
-      <% end %>
+      <%= render 'public/posts/taglist', tag_list: @tag_list %>
     </div>
     <!--新規投稿-->
     <div class = "text-center mt-5">
