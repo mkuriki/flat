@@ -1,5 +1,7 @@
   <!--タグリスト-->
-  <% tag_list.each do |list|%>
+<% tag_list.each do |list|%>
+  <% if list.posts.present? %>
     <%=link_to list.name, public_search_tag_path(tag_id: list.id) %>
     <%="(#{list.posts.count})" %>
   <% end %>
+<% end %>

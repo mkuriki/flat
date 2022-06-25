@@ -9,7 +9,13 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    tag_list = params[:post][:tag_name].split(',')
+    before_uniq_tag_list = params[:post][:tag_name].split(' ')
+    after_uniq_tag_list = params[:post][:tag_name].split(' ').uniq
+    if before_uniq_tag_list.size == after_uniq_tag_list.size
+      tag_list =  before_uniq_tag_list
+    else
+      tag_list = after_uniq_tag_list
+    end
     if @post.save
       @post.save_tags(tag_list)
       redirect_to public_post_path(@post.id), notice: "投稿が作成されました"
@@ -59,7 +65,7 @@ class Public::PostsController < ApplicationController
 
   # 投稿データのストロングパラメータ
   def post_params
-    params.require(:post).permit(:title, :body, :post_image, )
+    params.require(:post).permit(:title, :body, :post_image)
   end
    # 特定のユーザーとログインユーザーの一致を確認
   def ensure_correct_user
