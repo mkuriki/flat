@@ -3,9 +3,6 @@ class Tag < ApplicationRecord
   has_many :post_tags, dependent: :destroy, foreign_key: 'tag_id'
   has_many :posts, through: :post_tags
 
-  #バリデーション
-  validates :name, length: { maximum: 10 }
-
   # 検索方法分岐
   def self.search_posts_for(search, word)
     if search == "perfect_match" #完全一致
