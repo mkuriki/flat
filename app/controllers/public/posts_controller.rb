@@ -38,11 +38,18 @@ class Public::PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    @tag = @post.tags.pluck(:name).join(',')
   end
 
   def update
     @post = Post.find(params[:id])
-    if @post.update(post_params)
+    @tag_list=params[:post][:name].split(',')
+    if  @post.update(post_params)
+      @old_relations = PostTag.where(post_id: @post.id)
+      @old_relations.each do |relation|
+        relation.delete
+      end
+      @post.save_tags(@tag_list)
       redirect_to public_post_path(@post), notice: "投稿が更新されました"
     else
       render :edit
