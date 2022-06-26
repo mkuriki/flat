@@ -28,6 +28,7 @@
                 </td>
                 <td>
                    <%= link_to '編集', edit_admin_post_group_path(@post, @group), class: "btn btn-sm btn-success" %>
+                   <%= link_to 'グループ削除',  admin_post_group_all_destroy_path(@post,@group), method: :delete, data: { confirm: '本当に削除しますか？' } , class: "btn btn-sm btn-outline-danger" %>
                 </td>
             </tr>
         </tbody>

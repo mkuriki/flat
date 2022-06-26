@@ -22,6 +22,14 @@ class Admin::GroupsController < ApplicationController
     end
   end
   
+  def all_destroy
+    @post = Post.find(params[:post_id])
+    @group = Group.find(params[:group_id])
+    if @group.destroy
+    redirect_to admin_post_path(@post)
+    end
+  end
+  
   private
   
   #グループ更新のストロングパラメータ

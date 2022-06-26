@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       #グループ機能
       resources :groups do
         resource :group_users, only: [:create, :destroy]
+        delete "all_destroy" => 'groups#all_destroy'
       end
     end
   end
@@ -50,6 +51,7 @@ Rails.application.routes.draw do
       #グループ機能
       resources :groups do
         resource :group_users, only: [:create, :destroy]
+        delete "all_destroy" => 'groups#all_destroy'
       end
     end
 
