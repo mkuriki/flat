@@ -7,8 +7,8 @@
       <!--タグリスト-->
       <%= render 'public/posts/taglist', tag_list: @tag_list %>
     </div>
-    <!--新規投稿-->
-    <%= render 'public/posts/new' %>
+    <!--ボタン_新規投稿-->
+    <%= render 'public/posts/button_new' %>
     <!--投稿一覧-->
     <%= render 'public/posts/index', posts: @posts %>
     <div class = "text-center m-3"><%= paginate @posts %></div>

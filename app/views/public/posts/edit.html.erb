@@ -3,14 +3,14 @@
     <div class = "col-sm-12">
       <h3 class = "m-3">投稿編集</h3>
       <% if @post.errors.any? %>
-        <%= @post.errors.count %>errors prohibited this obj from being saved: 
+        <%= @post.errors.count %>errors prohibited this obj from being saved:
         <ul>
           <% @post.errors.full_messages.each do |message| %>
           <li><%= message %></li>
           <% end %>
         </ul>
       <% end %>
-      
+
       <%= form_with model: @post,url: public_post_path do |f| %>
         <div class="form-group">
           <label for="post_title">タイトル</label>
