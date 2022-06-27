@@ -32,6 +32,10 @@ Rails.application.routes.draw do
         delete "all_destroy" => 'groups#all_destroy'
       end
     end
+    
+    #検索
+    get "search" => 'searches#search'
+    get "search_tag"=>"posts#search_tag"
   end
 
   #会員側

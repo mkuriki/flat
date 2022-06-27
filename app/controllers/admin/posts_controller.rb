@@ -3,6 +3,7 @@ class Admin::PostsController < ApplicationController
 
   def index
     @posts = Post.page(params[:page])
+    @tag_list = Tag.all
   end
 
   def show

@@ -33,6 +33,7 @@
               <i class="fas fa-sign-out-alt"></i> ログアウト
               <% end %>
             </li>
+            <%= render "admin/searches/text_form" %>
           <!--会員ユーザー-->
           <% elsif user_signed_in? %>
             <li class="nav-item">

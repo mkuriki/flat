@@ -21,12 +21,12 @@
         </tbody>
       </table>
     </div>
-      <!--閲覧権限_ログインユーザーのみ閲覧可能-->
+    <!--ユーザーとログインユーザーの一致を判定(true -> 閲覧可能)-->
     <% if @user == current_user %>
     <div class = "col-12 ">
       <div>
         <div class = "text-center mb-3">
-        <!--ユーザーの名前がguestuserである場合には、表示しません-->
+        <!--ユーザーの名前がguestuserであるかを判定(true -> ユーザー編集画面へ遷移できない)-->
         <% if @user.name != "guestuser" %>
           <!--ユーザー情報編集-->
           <%= link_to edit_public_user_path(@user), class: "btn btn-outline-secondary mx-auto col-12" do %>
@@ -47,7 +47,7 @@
               </tr>
             </thead>
             <tbody>
-              <% @favorites.each do |favorite| %>
+              <% @myfavorites.each do |favorite| %>
                 <tr>
                   <td><%= favorite.post.user.name %></td>
                   <td>
@@ -86,6 +86,7 @@
       <!--ユーザーの投稿一覧-->
       <h4 class = "text-center mt-5">マイポスト</h4>
       <%= render "public/posts/index", posts: @myposts %>
+      <div class = "text-center m-3"><%= paginate @myposts %></div>
     </div>
     <% end %>
   </div>

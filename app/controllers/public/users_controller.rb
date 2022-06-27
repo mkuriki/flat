@@ -6,8 +6,8 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @favorites = Favorite.where(user_id: current_user.id)
-    @myposts = Post.where(user_id: current_user.id)
+    @myfavorites = Favorite.where(user_id: current_user.id)
+    @myposts = Post.where(user_id: current_user.id).page(params[:page])
     @mygroups = GroupUser.where(user_id: current_user.id)
   end
 

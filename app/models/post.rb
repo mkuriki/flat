@@ -25,7 +25,7 @@ class Post < ApplicationRecord
       post_image.variant(resize_to_limit: [width, height]).processed
   end
   
-  #ログインユーザーが投稿作成者か確認
+  #ユーザーが投稿作成者かの確認
   def is_owned_by?(user)
     self.user == user
   end
