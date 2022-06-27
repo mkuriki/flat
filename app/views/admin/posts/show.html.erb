@@ -39,6 +39,10 @@
      <% end %>
     </body>
   </table>
+  <!--コメント一覧-->
+  <div class="comments_index">
+    <%= render 'admin/post_comments/index', post: @post, post_comment: @post_comment %>
+  </div>
   <%= link_to "投稿編集", edit_admin_post_path(@post), class: "btn btn-sm btn-success edit_post mb-3" %>
   <%= link_to "投稿削除", admin_post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger ml-3 mb-3 destroy_post "  %>
 </div>

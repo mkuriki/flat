@@ -3,15 +3,15 @@
     <% post.post_comments.each do |post_comment| %>
     <tr>
       <td>
-        <%= link_to public_user_path(post_comment.user) do %>
+        <%= link_to admin_user_path(post_comment.user) do %>
           <%= image_tag post_comment.user.get_profile_image(100,100) %><br>
           <%= post_comment.user.name %>
         <% end %>
       </td>
       <td><%= post_comment.comment %></td>
       <td>
-        <% if post_comment.user == current_user %>
-          <%= link_to "コメント削除", public_post_post_comment_path(post, post_comment), method: :delete, remote: true, class: "btn btn-danger btn-sm pull-right ml-3" %>
+        <% if admin_signed_in? %>
+          <%= link_to "コメント削除", admin_post_post_comment_path(post, post_comment), method: :delete, remote: true, class: "btn btn-danger btn-sm pull-right ml-3" %>
         <% end %>
       </td>
     </tr>

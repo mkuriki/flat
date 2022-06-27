@@ -8,13 +8,9 @@
       <%= render 'public/posts/taglist', tag_list: @tag_list %>
     </div>
     <!--新規投稿-->
-    <div class = "text-center mt-5">
-      <%= link_to new_public_post_path, class: "btn btn-outline-info btn-lg btn-block" do %>
-        <i class="fas fa-flag"></i> 投稿する
-      <% end %>
-    </div>
+    <%= render 'public/posts/new' %>
     <!--投稿一覧-->
-    <%= render "public/posts/index", posts: @posts %>
+    <%= render 'public/posts/index', posts: @posts %>
     <div class = "text-center m-3"><%= paginate @posts %></div>
   </div>
 </div>

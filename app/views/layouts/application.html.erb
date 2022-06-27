@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -33,6 +34,7 @@
               <i class="fas fa-sign-out-alt"></i> ログアウト
               <% end %>
             </li>
+            <!--検索フォーム-->
             <%= render "admin/searches/text_form" %>
           <!--会員ユーザー-->
           <% elsif user_signed_in? %>
@@ -51,34 +53,8 @@
               <i class="fas fa-sign-out-alt"></i> ログアウト
               <% end %>          
             </li>
-              <!--検索ボタン-->
-              <li type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalLong">
-                <i class="fa fa-search"></i>
-              </li>
-              <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLongTitle">検索</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <%= form_with url: public_search_path, method: :get, local: true do |f| %>
-                    <div class="modal-body">
-                       <%= f.label :word, "投稿やユーザを検索"%>
-                       <%= f.text_field :word, size: "50", placeholder: "目的地や観光地など" %>
-                       <%= f.select :range, options_for_select([["投稿検索", 'Post'], ["ユーザー検索", 'User']]) %>
-                       <%= f.select :search, options_for_select([["部分一致","partial_match"], ["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backward_match"]]) %>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-                      <%= button_tag '<i class="fa fa-search"></i>'.html_safe, :type => "submit", :class =>"btn btn-info" %>
-                    </div>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
+            <!--検索ボタン-->
+            <%= render "public/searches/button" %>
           <!--ゲスト、非会員-->
           <% else %>
             <li class="nav-item">

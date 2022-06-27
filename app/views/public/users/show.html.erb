@@ -24,8 +24,7 @@
     <!--ユーザーとログインユーザーの一致を判定(true -> 閲覧可能)-->
     <% if @user == current_user %>
     <div class = "col-12 ">
-      <div>
-        <div class = "text-center mb-3">
+      <div class = "text-center mb-3">
         <!--ユーザーの名前がguestuserであるかを判定(true -> ユーザー編集画面へ遷移できない)-->
         <% if @user.name != "guestuser" %>
           <!--ユーザー情報編集-->
@@ -33,7 +32,6 @@
             <i class="fas fa-user-cog"></i>　プロフィールを編集
           <% end %>
         <% end %>
-        </div>
       </div>
       <div class = "row justify-content-around">
         <!--ユーザーがいいねした投稿一覧-->
@@ -83,6 +81,8 @@
           </table>
         </div>
       </div>
+      <!--新規投稿-->
+      <%= render 'public/posts/new' %>
       <!--ユーザーの投稿一覧-->
       <h4 class = "text-center mt-5">マイポスト</h4>
       <%= render "public/posts/index", posts: @myposts %>
