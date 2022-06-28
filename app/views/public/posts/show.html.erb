@@ -7,7 +7,7 @@
 <div class = "container text-center">
   <!--投稿詳細、編集、削除-->
   <div class = "m-5">
-    <%= image_tag @post.get_post_image(500,500), class: "m-3" %>
+    <%= image_tag @post.get_post_image(800,800), class: "m-3" %>
     <h2><%= @post.title %></h2>
     <h5>詳細</h5>
     <p><%= safe_join(@post.body.split("\n"),tag(:br)) %></p>

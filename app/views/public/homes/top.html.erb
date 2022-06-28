@@ -1,30 +1,34 @@
 <div class = "container">
   <div class = "row">
     <div class = "col-12">
+      <div class="container px-auto mx-auto">
       <h1 class = "page-title text-center m-5">Make Your Day !!</h1>
       <p class = "text-center">ふらっときままに　<i class="fas fa-cloud"></i></p>
       <!--検索フォーム-->
-      <div class="search_form">
-        <%= form_with url: public_search_path, local: true, method: :get do |f| %>
+      <div class="row justify-content-center m-5">
+        <div class="col">
+          <%= form_with url: public_search_path, local: true, method: :get do |f| %>
           <%= f.text_field :word, placeholder: "目的・観光地など", class: "form-control" %>
-          <%= f.select :range, options_for_select([["投稿検索", 'Post'], ["ユーザー検索", 'User']]) %>
-          <%= f.select :search, options_for_select([["部分一致","partial_match"], ["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backward_match"]]) %>
-          <%= f.submit "検索", class: "btn btn-primary" %>
-        <% end %>
+          <%= f.hidden_field :range, :value => "Post" %>
+          <%= f.hidden_field :search, :value => "partial_match" %>
+          <div class = "text-center p-2"><%= f.submit "検索", class: "btn btn-info " %></div>
+          <% end %>
+        </div>
       </div>
-      
+
       <!--ボタン＿投稿一覧ページへ遷移-->
-      <div class= "text-center m-3">
+      <div class= "text-center m-5">
         <%= link_to public_posts_path, class: "btn btn-outline-info btn-lg" do %>
         <i class="fas fa-search"></i> 投稿をチェック
         <% end %>
       </div>
-      
+      </div>
+
        <!--ボタン＿ゲストログインページへ遷移-->
       <div class="row">
         <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in", method: :post %>
-      </div>     
-      
+      </div>
+
       <!--新着投稿一覧-->
       <h2 class= "text-center m-3">新着投稿</h2>
       <%= render "public/posts/index", posts: @posts %>

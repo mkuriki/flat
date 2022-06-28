@@ -19,14 +19,14 @@
     </div>
     <div class = form-group>
       <label for="post_body">詳細</label>
-      <%= f.text_area :body, class: "form-control post_body"%>
+      <%= f.text_area :body, rows:'10', class: "form-control post_body"%>
     </div>
     <div class="form-group">
       <label for="post_tag">タグ</label>
       <%= f.text_field :tag_name, class: 'form-control post_tag', placeholder: "半角スペースで複数のタグをつけられるよ"  %>
     </div> 
-    <div class = form-group>
-      <%= f.submit '投稿する', class: "btn btn-sm btn-success" %>
+    <div class = "form-group text-center">
+      <%= f.submit '投稿する', class: "btn btn-lg btn-success" %>
     </div>
   <% end %>
 </div>
