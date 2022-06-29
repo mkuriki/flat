@@ -1,40 +1,40 @@
 <h4 class = "text-center m-3">会員詳細</h4>
 <div class="container">
-    <table class="table table-hover teble-inverse mb-5">
-        <tbody>
-            <tr>
-                <td>会員ID</td>
-                <td><%= @user.id %></td>
-            </tr>
-            <tr>
-                <td>性</td>
-                <td><%= @user.last_name %></td>
-            </tr>
-            <tr>
-                <td>名</td>
-                <td><%= @user.first_name %></td>
-            </tr>
-            <tr>
-                <td>ニックネーム</td>
-                <td><%= @user.name %></td>
-            </tr>
-            <tr>
-                <td>メールアドレス</td>
-                <td><%= @user.email %></td>
-            </tr>
-            <tr>
-                <td>電話番号</td>
-                <td><%= @user.phone_number %></td>
-            </tr>
-            <tr>
-                <td>会員ステータス</td>
-                <td><%= @user.is_deleted ? "退会" : "有効" %></td>
-            </tr>
-        </tbody>
-    </table
-    <div class="text-center col-sm-12 col-md-8 col-lg-4 offset-lg-4">
-        <div class = "text-center mb-3">
-            <%= link_to "編集する", edit_admin_user_path(@user), class: "btn btn-success col-lg-5 edit_admin_user_#{@user.id}" %>
-        </div>
+  <table class="table table-hover teble-inverse mb-5">
+    <tbody>
+      <tr>
+        <td>会員ID</td>
+        <td><%= @user.id %></td>
+      </tr>
+      <tr>
+        <td>性</td>
+        <td><%= @user.last_name %></td>
+      </tr>
+      <tr>
+        <td>名</td>
+        <td><%= @user.first_name %></td>
+      </tr>
+      <tr>
+        <td>ニックネーム</td>
+        <td><%= @user.name %></td>
+      </tr>
+      <tr>
+        <td>メールアドレス</td>
+        <td><%= @user.email %></td>
+      </tr>
+      <tr>
+        <td>電話番号</td>
+        <td><%= @user.phone_number %></td>
+      </tr>
+      <tr>
+        <td>会員ステータス</td>
+        <td><%= @user.is_deleted ? "退会" : "有効" %></td>
+      </tr>
+    </tbody>
+  </table
+  <div class="text-center col-sm-12 col-md-8 col-lg-4 offset-lg-4">
+    <div class = "text-center mb-3">
+      <%= link_to "編集する", edit_admin_user_path(@user), class: "btn btn-success col-lg-5 edit_admin_user_#{@user.id}" %>
     </div>
+  </div>
 </div>

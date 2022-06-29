@@ -77,7 +77,7 @@ class Public::PostsController < ApplicationController
    # 特定のユーザーとログインユーザーの一致を確認
   def ensure_correct_user
     @post = Post.find(params[:id])
-    unless @post.user == current_user
+    unless is_owned_by?(current_user)
       redirect_to public_posts_path
     end
   end

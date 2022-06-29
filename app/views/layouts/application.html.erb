@@ -6,7 +6,6 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -79,7 +78,13 @@
     </nav>
     </header>
     <main>
-    <%= yield %>
+      <%= yield %>
+      <span id="back">
+        <a href="">
+          <%= image_tag asset_path('arrow.png'), data: {"turbolinks"=>false}, class: "arrow" %>
+        </a>
+      </span>
+      <script src="/flat/app/javascript/script.js"></script>
     </main>
     <!--フッター-->
     <footer class="bg-dark text-white pt-5 pb-4">
