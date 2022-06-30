@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    
+
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -50,7 +50,7 @@
             <li class="nav-item">
               <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-dark' do %>
               <i class="fas fa-sign-out-alt"></i> ログアウト
-              <% end %>          
+              <% end %>
             </li>
             <!--検索ボタン-->
             <%= render "public/searches/button" %>
@@ -80,11 +80,10 @@
     <main>
       <%= yield %>
       <span id="back">
-        <a href="">
+        <a href="#">
           <%= image_tag asset_path('arrow.png'), data: {"turbolinks"=>false}, class: "arrow" %>
         </a>
       </span>
-      <script src="/flat/app/javascript/script.js"></script>
     </main>
     <!--フッター-->
     <footer class="bg-dark text-white pt-5 pb-4">
