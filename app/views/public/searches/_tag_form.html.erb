@@ -1,8 +1,11 @@
   <div class="search_form m-1">
+    <P class= "my-3">キーワードから検索：</P>
     <%= form_with url: public_search_path, method: :get, local: true do |f| %>
-      <%= f.text_field :word, placeholder: "search" %>
+     <div class="d-flex align-items-center">
+     <div class = "m-1"><%= f.text_field :word, placeholder: "search", class: "form-control" %></div>
+      <%= f.submit '検索', class: "btn btn-md btn-info d-flex align-items-center" %>
+    </div>
       <%= f.hidden_field :range, :value => "Tag" %>
       <%= f.hidden_field :search, :value => "partial_match" %>
-      <%= f.submit 'タグ検索', class: "btn btn-sm btn-info" %>
     <% end %>
   </div>

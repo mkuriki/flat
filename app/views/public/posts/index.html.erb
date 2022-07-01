@@ -1,17 +1,21 @@
-<div class="container">
-  <div class="mb-auto">
-    <div class = "mt-3">
-      <!--検索フォーム-->
-      <%= render 'public/searches/text_form' %>
-      <%= render 'public/searches/date_form' %>
-      <%= render 'public/searches/tag_form' %>
-      <!--タグリスト-->
-      <%= render 'public/posts/taglist', tag_list: @tag_list %>
+<!--投稿一覧-->
+<div class="container mb-auto">
+  <div class="row">
+    <div class="col-lg-5 col-md-12">
+      <div class="container py-5 sticky-top">
+        <!--検索フォーム-->
+        <%= render 'public/searches/text_form' %>
+        <%= render 'public/searches/date_form' %>
+        <%= render 'public/searches/tag_form' %>
+        <!--タグリスト-->
+        <%= render 'public/posts/taglist', tag_list: @tag_list %>
+        <!--ボタン_新規投稿-->
+          <%= render 'public/posts/button_new' %>
+      </div>
     </div>
-    <!--ボタン_新規投稿-->
-    <%= render 'public/posts/button_new' %>
-    <!--投稿一覧-->
-    <%= render 'public/posts/index', posts: @posts %>
-    <div class = "text-center m-3"><%= paginate @posts %></div>
+    <div class="col-lg-7 col-md-12">
+      <%= render 'public/posts/index', posts: @posts %>
+      <div class = "text-center m-3"><%= paginate @posts %></div>
+    </div>
   </div>
 </div>

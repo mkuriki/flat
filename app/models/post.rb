@@ -8,15 +8,15 @@ class Post < ApplicationRecord
   has_many :group_users, through: :groups, dependent: :destroy
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags, dependent: :destroy
-  
+
   #一枚の画像添付
   has_one_attached :post_image
-  
+
   #バリデーション
   validates :title, length: { maximum: 20 }, presence: true
   validates :body, presence: true
   validates :date, presence: true
-  
+
   #投稿画像添付
   def get_post_image(width, height)
     unless post_image.attached?
@@ -25,17 +25,17 @@ class Post < ApplicationRecord
     end
       post_image.variant(resize_to_limit: [width, height]).processed
   end
-  
+
   #ユーザーが投稿作成者かの確認
   def is_owned_by?(user)
     self.user == user
   end
-  
+
   #いいねがされているかの確認
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
-  
+
   #タグの保存
   def save_tags(savepost_tags)
     current_tags = self.tags.pluck(:name) unless self.tags.nil?
@@ -64,7 +64,7 @@ class Post < ApplicationRecord
     elsif search == "backward_match"#後方一致
       @post = Post.where("title LIKE?","%#{word}")
     elsif search == "partial_match"#部分一致
-      @post = Post.where("title || date LIKE?","%#{word}%")
+      @post = Post.where("title LIKE?","%#{word}%"). or where("date LIKE?","%#{word}%")
     else
       @post = Post.all
     end
