@@ -7,6 +7,7 @@ ja:
       post:
         title: タイトル
         body: 詳細
+        date: 日付
       group:
         name: グループ名
         introduction: グループ紹介文

@@ -15,7 +15,7 @@ class Post < ApplicationRecord
   #バリデーション
   validates :title, length: { maximum: 20 }, presence: true
   validates :body, presence: true
-  validates :date, presence: false
+  validates :date, presence: true
   
   #投稿画像添付
   def get_post_image(width, height)

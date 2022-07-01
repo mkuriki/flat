@@ -8,6 +8,7 @@
   <div class = "m-5">
     <%= image_tag @post.get_post_image(200,200) %>
     <p>タイトル：<%= @post.title %></p>
+    <p>予定日：<%= @post.date.strftime('%Y/%m/%d') %></p>
     <p>説明：<%= @post.body %></p>
     <p><%= link_to image_tag(@post.user.get_profile_image(100,100)), admin_user_path(@post.user) %></p>
     <p>ユーザーネーム：<%= @post.user.name %></p>
