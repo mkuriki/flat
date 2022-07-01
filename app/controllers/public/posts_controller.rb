@@ -72,7 +72,7 @@ class Public::PostsController < ApplicationController
 
   # 投稿データのストロングパラメータ
   def post_params
-    params.require(:post).permit(:title, :body, :date, :post_image)
+    params.require(:post).permit(:title, :body, :post_image)
   end
    # 特定のユーザーとログインユーザーの一致を確認
   def ensure_correct_user

@@ -6,7 +6,7 @@ ja:
     attributes:
       post:
         title: タイトル
-        body: 本文
+        body: 詳細
       group:
         name: グループ名
         introduction: グループ紹介文
