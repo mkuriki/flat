@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 2022_06_07_085413) do
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "body"
+    t.date "date"
     t.integer "user_id"
     t.integer "group_id"
     t.integer "post_image_id"
