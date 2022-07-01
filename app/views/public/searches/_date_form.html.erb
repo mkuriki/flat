@@ -1,0 +1,8 @@
+<div class="search_form m-1">
+  <%= form_with url: public_search_path, local: true, method: :get do |f| %>
+    <%= f.date_field :word %>
+    <%= f.hidden_field :range, :value => "Post" %>
+    <%= f.hidden_field :search, :value => "partial_match" %>
+    <%= f.submit "日程検索", class: "btn btn-sm btn-info " %>
+  <% end %>
+</div>

@@ -64,7 +64,7 @@ class Post < ApplicationRecord
     elsif search == "backward_match"#後方一致
       @post = Post.where("title LIKE?","%#{word}")
     elsif search == "partial_match"#部分一致
-      @post = Post.where("title LIKE?","%#{word}%")
+      @post = Post.where("title || date LIKE?","%#{word}%")
     else
       @post = Post.all
     end
