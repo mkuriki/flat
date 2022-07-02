@@ -1,21 +1,21 @@
 <div class = "container">
   <div class = "row">
     <div class = "col-12">
-      <div class="container px-auto mx-auto">
+      <div class="page-top container px-auto mx-auto">
       <h1 class = "page-title text-center m-5">Make Your Day !!</h1>
-      <p class = "text-center">ふらっときままに　<i class="fas fa-cloud"></i></p>
+      <p class = "text-center mb-5">ふらっときままに　<i class="fas fa-cloud"></i></p>
       <!--検索フォーム-->
-      <div class="row justify-content-center m-5">
-        <div class="col">
+      <div class="search_form m-1">
           <%= form_with url: public_search_path, local: true, method: :get do |f| %>
-          <%= f.text_field :word, placeholder: "目的・観光地など", class: "form-control" %>
+          <div class="d-flex align-items-center justify-content-center">
+            <div class = "m-1 col-10"><%= f.text_field :word, placeholder: "目的・観光地など", class: "form-control" %></div>
+            <div><%= f.submit "検索", class: "btn btn-md btn-info d-flex align-items-center" %></div>
+          </div>
           <%= f.hidden_field :range, :value => "Post" %>
           <%= f.hidden_field :search, :value => "partial_match" %>
-          <div class = "text-center p-2"><%= f.submit "検索", class: "btn btn-info " %></div>
           <% end %>
-        </div>
       </div>
-      
+
       <!--ボタン＿投稿一覧ページへ遷移-->
       <div class= "text-center m-5">
         <%= link_to public_posts_path, class: "btn btn-outline-info btn-lg" do %>
@@ -31,7 +31,11 @@
 
       <!--新着投稿一覧-->
       <h2 class= "text-center m-3">新着投稿</h2>
-      <%= render "public/posts/index_card_w-50", posts: @posts %>
+      <div class = "row  justify-content-center">
+        <div class="col-lg-7 col-md-12">
+          <%= render "public/posts/index_card", posts: @posts %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
