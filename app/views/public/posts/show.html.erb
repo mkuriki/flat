@@ -4,31 +4,47 @@
  </div>
 <% end %>
 
-<div class = "container text-center">
+<div class = "container">
   <!--投稿詳細、編集、削除-->
   <div class = "m-5">
-    <%= image_tag @post.get_post_image(800,800), class: "m-3" %>
-    <h2><%= @post.title %></h2>
-    <p>予定日：<%= @post.date.strftime('%Y/%m/%d') %></p>
-    <h5>詳細</h5>
-    <p><%= safe_join(@post.body.split("\n"),tag(:br)) %></p>
-    <p class="comments_count">コメント数: <%= @post.post_comments.count %></p>
-    <% @post.tags.each do |tag| %>
-      <i class="fas fa-tag"></i><%= link_to tag.name, public_search_path(word: tag.name, range: "Tag", search: "perfect_match") %>
-    <% end %>
-    <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
-    <div>
-      <p><%= link_to image_tag(@post.user.get_profile_image(100,100)), public_user_path(@post.user) %></p>
-      <p><i class="fas fa-user"></i><%= @post.user.name %></p>
+    <div class="card-list-container py-5">
+      <div class="card w-60 mx-auto mt-4 shadow-lg">
+        <div class= "text-center m-3">
+          <%= link_to public_post_path(@post) do %>
+            <%= image_tag @post.get_post_image(800,800), class: "card-img-top" %>
+          <% end %>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <h2 class="card-title text-center"><%= @post.title %></h2>
+              <p class="card-text"><%= safe_join(@post.body.split("\n"),tag(:br)) %></p>
+              <p>予定日：<%= @post.date.strftime('%Y/%m/%d') %></p>
+              <% @post.tags.each do |tag| %>
+                <i class="fas fa-tag"></i><%= link_to tag.name, public_search_path(word: tag.name, range:"Tag", search: "perfect_match") %>
+              <% end %>
+              <p class="comments_count">コメント数: <%= @post.post_comments.count %></p>
+              <p>掲載日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    <div>
      <% if @post.is_owned_by?(current_user) %>
-       <div class="row justify-content-center">
-         <%= link_to "投稿編集", edit_public_post_path(@post), class: "btn btn-sm btn-success edit_post" %>
-         <%= link_to "投稿削除", public_post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger destroy_post ml-3" %>
+       <div class="row justify-content-center m-5">
+         <%= link_to "投稿削除", public_post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-md btn-danger destroy_post" %>
+         <%= link_to "投稿編集", edit_public_post_path(@post), class: "btn btn-md btn-success edit_post  ml-5" %>
        </div>
      <% end %>
+    <div class = "text-center border border-info border-right-0 border-left-0">
+      <p class = "m-2">投稿者 </br>-The Owner- </p>
+      <p class = "m-3"><%= link_to image_tag(@post.user.get_profile_image(100,100)), public_user_path(@post.user) %></p>
+      <p><i class="fas fa-user"></i><%= link_to @post.user.name, public_user_path(@post.user) %></p>
+    </div>
+    </div>
   </div>
-
+  
   <!--グループ一覧、作成、編集-->
   <h3 class = "m-3">グループ</h3>
   <table class = "table table-hover">

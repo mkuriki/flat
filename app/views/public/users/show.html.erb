@@ -85,7 +85,7 @@
       <%= render 'public/posts/button_new' %>
       <!--ユーザーの投稿一覧-->
       <h4 class = "text-center mt-5">マイポスト</h4>
-      <%= render "public/posts/index", posts: @myposts %>
+      <%= render "public/posts/index_card_w-50", posts: @myposts %>
       <div class = "text-center m-3"><%= paginate @myposts %></div>
     </div>
     <% end %>

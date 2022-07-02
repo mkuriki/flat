@@ -1,0 +1,29 @@
+<!--投稿一覧_card w-50-->
+<div class="card-list-container py-5">
+  <% posts.each do |post| %>
+    <div class="card w-50 mx-auto mt-4 shadow-lg">
+      <div class= "text-center m-3">
+        <%= link_to public_post_path(post) do %>
+          <%= image_tag post.get_post_image(800,800), class: "card-img-top" %>
+        <% end %>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-3 text-center">
+            <p><%= link_to image_tag(post.user.get_profile_image(60,60), class: "rounded-circle"), public_user_path(post.user) %></p>
+            <span class = "d-flex flex-nowrap justify-content-center"><i class="fas fa-user"></i><%=link_to post.user.name, public_user_path(post.user) %></span>
+          </div>
+          <div class="col-9">
+            <p id="fav_<%= post.id %>"><%= render "public/favorites/fav", post: post %></p>
+            <p class="card-text"><%= link_to post.title, public_post_path(post) %></p>
+            <p class="card-text"><%= safe_join(post.body.split("\n"),tag(:br)) %></p>
+            <p>予定日：<%= post.date.strftime('%Y/%m/%d') %></p>
+            <% post.tags.each do |tag| %>
+              <i class="fas fa-tag"></i><%= link_to tag.name, public_search_path(word: tag.name, range:"Tag", search: "perfect_match") %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
