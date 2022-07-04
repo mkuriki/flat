@@ -9,7 +9,7 @@
     <%= image_tag @post.get_post_image(200,200) %>
     <p>タイトル：<%= @post.title %></p>
     <p>予定日：<%= @post.date.strftime('%Y/%m/%d') %></p>
-    <p>説明：<%= @post.body %></p>
+    <%= safe_join(@post.body.split("\n"),tag(:br)) %></p>
     <p><%= link_to image_tag(@post.user.get_profile_image(100,100)), admin_user_path(@post.user) %></p>
     <p>ユーザーネーム：<%= @post.user.name %></p>
     <p class="comments_count">コメント数: <%= @post.post_comments.count %></p>
@@ -44,7 +44,7 @@
   <div class="comments_index">
     <%= render 'admin/post_comments/index', post: @post, post_comment: @post_comment %>
   </div>
-  <%= link_to "投稿編集", edit_admin_post_path(@post), class: "btn btn-sm btn-success edit_post mb-3" %>
-  <%= link_to "投稿削除", admin_post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger ml-3 mb-3 destroy_post "  %>
+  <%= link_to "投稿削除", admin_post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger mb-3 destroy_post "  %>
+  <%= link_to "投稿編集", edit_admin_post_path(@post), class: "btn btn-sm btn-success edit_post mb-3 ml-3" %>
 </div>
 

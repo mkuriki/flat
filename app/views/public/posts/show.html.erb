@@ -19,7 +19,7 @@
             <div class="col">
               <h2 class="card-title text-center"><%= @post.title %></h2>
               <p class="card-text"><%= safe_join(@post.body.split("\n"),tag(:br)) %></p>
-              <p>予定日：<%= @post.date.strftime('%Y/%m/%d') %></p>
+              <p>予定日 <i class="fas fa-calendar-alt"></i> <%= @post.date.strftime('%Y/%m/%d') %></p>
               <% @post.tags.each do |tag| %>
                 <i class="fas fa-tag"></i><%= link_to tag.name, public_search_path(word: tag.name, range:"Tag", search: "perfect_match") %>
               <% end %>
