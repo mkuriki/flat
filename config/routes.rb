@@ -56,6 +56,8 @@ Rails.application.routes.draw do
       resources :groups do
         resource :group_users, only: [:create, :destroy]
         delete "all_destroy" => 'groups#all_destroy'
+       resources :event_notices, only: [:new, :create]
+       get "event_notices" => "event_notices#sent"
       end
     end
 
