@@ -38,9 +38,16 @@
              <%= link_to  public_post_group_all_destroy_path(@post,@group), method: :delete, data: { confirm: '本当に削除しますか？' } , class: "btn btn-sm btn-outline-danger" do %>
                <i class="fas fa-trash-alt"></i> 削除
              <% end %>
+             
+<%
+=begin
+%>
              <%= link_to new_public_post_group_event_notice_path(@post,@group), class: "btn btn-sm btn-info" do %>
               <i class="fas fa-paper-plane"></i> Mail
              <% end %>
+             <%
+=end
+%>
             <% end %>
             <%= link_to '投稿詳細へ', public_post_path(@post), class: "ml-3" %>
           </td>
