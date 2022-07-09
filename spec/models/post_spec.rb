@@ -1,9 +1,8 @@
 # frozen_string_literal: true
+require 'rails_helper'
 
-# require 'rails_helper'
-
-describe 'モデルのテスト' do
-  it "有効なテスト内容の場合は保存されるか" do
-    expect(FactoryBot.build(:post)).to be_valid
+RSpec.describe Post, type: :model do
+    it "有効な投稿内容の場合は保存されるか" do
+    expect(build(:post)).to be_valid
   end
 end
