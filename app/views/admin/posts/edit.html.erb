@@ -3,12 +3,12 @@
     <div class = "col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
       <h1>投稿編集</h1>
         <% if @post.errors.any? %>
-            <%= @post.errors.count %>errors prohibited this obj from being saved: 
-            <ul>
-            <% @post.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-            <% end %>
-            </ul>
+          <%= @post.errors.count %>errors prohibited this obj from being saved: 
+          <ul>
+          <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+          <% end %>
+          </ul>
         <% end %>             
         <%= form_with model: @post,url: admin_post_path do |f| %>
           <div class="form-group">
