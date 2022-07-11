@@ -31,6 +31,12 @@ RSpec.describe User, type: :model do
      user.valid?
      expect(user.errors[:phone_number]).to include("を入力してください")
     end
+    it "すでに存在しているemailは保存しない" do
+      user = create(:user)
+      another_user = build(:user, email: user.email)
+      another_user.valid?
+      expect(another_user.errors[:email]).to include("はすでに存在します")
+    end
   end
   
 end
