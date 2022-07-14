@@ -22,8 +22,11 @@ RSpec.describe "Posts", type: :system do
       visit public_posts_path
     end
     context'表示の確認' do
-	   it "postの一覧表示と新規投稿フォームのリンクが表示されているか" do
-
+	   it 'public_posts_pathが"/public/posts"であるか'do
+	     expect(current_path).to eq('/public/posts')
+	   end
+	   it '投稿するボタンが表示されているか' do
+      expect(page).to have_selector('a', text: '投稿する')
 	   end
     end
   end
