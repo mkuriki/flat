@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe "Posts", type: :system do
+RSpec.describe "Postコントローラのテスト", type: :system do
   let!(:post) { build(:post, title: 'hoge',body: 'body') }
   describe 'トップ画面(root_path)のテスト' do
     before do
