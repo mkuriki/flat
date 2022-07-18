@@ -51,5 +51,28 @@ RSpec.describe "ユーザログイン前のテスト", type: :system do
           expect(log_in_link).to match(/ログイン/)
         end
       end
+      
+      context 'リンクの内容を確認' do
+        subject { current_path }
+        
+        it 'サイトについてを押すと、サイトについて画面に遷移する' do
+          about_link = find_all('a')[1].native.inner_text
+          about_link = about_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+          click_link about_link
+          is_expected.to eq "/public/about"
+        end
+        it '新規登録を押すと、新規登録画面に遷移する' do
+          about_link = find_all('a')[2].native.inner_text
+          about_link = about_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+          click_link about_link
+          is_expected.to eq "/user/sign_up"
+        end
+        it 'ログインを押すと、ログイン画面に遷移する' do
+          about_link = find_all('a')[3].native.inner_text
+          about_link = about_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+          click_link about_link
+          is_expected.to eq "/user/sign_in"
+        end
+      end
     end
 end
