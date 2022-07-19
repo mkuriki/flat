@@ -75,4 +75,60 @@ RSpec.describe "ユーザログイン前のテスト", type: :system do
         end
       end
     end
+    
+    describe 'ユーザー新規登録のテスト' do
+      before do
+        visit new_user_registration_path
+      end
+      
+      context '表示内容の確認' do
+        it 'URLが正しい' do
+          expect(current_path).to eq '/user/sign_up'
+        end
+        it '「新規登録」と表示される' do
+          expect(page).to have_content '新規登録'
+        end
+        it 'nameフォームが表示される' do
+          expect(page).to have_field 'user[name]'
+        end
+        it 'last_nameフォームが表示される' do
+          expect(page).to have_field 'user[last_name]'
+        end
+        it 'first_nameフォームが表示される' do
+          expect(page).to have_field 'user[first_name]'
+        end
+        it 'emailフォームが表示される' do
+          expect(page).to have_field 'user[email]'
+        end
+        it 'passwordフォームが表示される' do
+          expect(page).to have_field 'user[password]'
+        end
+        it 'password_confirmationフォームが表示される' do
+          expect(page).to have_field 'user[password_confirmation]'
+        end
+        it 'phone_numberフォームが表示される' do
+          expect(page).to have_field 'user[phone_number]'
+        end
+      end
+      
+      # context '新規登録成功のテスト' do
+      #   before do
+      #     fill_in 'user[name]', with: Faker::Name.name
+      #     fill_in 'user[last_name]', with: Faker::Lorem.characters(number: 10)
+      #     fill_in 'user[first_name]', with: Faker::Lorem.characters(number: 10)
+      #     fill_in 'user[phone_number]', with: Faker::Lorem.characters(number: 10)
+      #     fill_in 'user[email]', with: Faker::Internet.email
+      #     fill_in 'user[password]', with: 'password'
+      #     fill_in 'user[password_confirmation]', with: 'password'
+      #   end
+        
+      #   it '正しく新規登録される' do
+      #     expect { click_button '新規登録' }.to change(User.all, :count).by(1)
+      #   end
+      #   it '新規登録後のリダイレクト先が、新規登録できたユーザーの詳細画面になっている' do
+      #     click_button '新規登録'
+      #     expect(current_path).to eq 'public/users/' + User.last.id.to_s
+      #   end
+      # end
+    end
 end

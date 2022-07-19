@@ -3,6 +3,7 @@ ja:
     models:
       post: 投稿
       group: グループ
+      user: ユーザー
     attributes:
       post:
         title: タイトル
@@ -11,6 +12,11 @@ ja:
       group:
         name: グループ名
         introduction: グループ紹介文
+      user:
+        name: ニックネーム
+        last_name: 性
+        first_name: 名
+        phone_number: 電話番号
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
