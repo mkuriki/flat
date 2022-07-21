@@ -156,8 +156,9 @@ RSpec.describe "ユーザログイン前のテスト", type: :system do
       
       # context 'ログイン成功のテスト' do
       #   before do
-      #     fill_in 'user[email]', with: user.email
-      #     fill_in 'user[password]', with: user.password
+      #     visit new_user_session_path
+      #     fill_in 'field_1', with: user.email
+      #     fill_in 'field_2', with: user.password
       #     click_button 'ログイン'
       #   end
         

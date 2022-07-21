@@ -13,13 +13,13 @@
           <form id="new_user" class="new_user">
             <span><i class="fas fa-envelope"></i></span>
             <%= f.label :email %><br>
-            <%= f.text_field :email, autofocus: true, class: "form-control mb-3" %>
+            <%= f.text_field :email, autofocus: true, class: "form-control mb-3", id: 'field_1' %>
             
             <span><i class="fas fa-lock"></i></span>
             <%= f.label :password %>
             <% if @minimum_password_length %>
             <% end %><br />
-            <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>        
+            <%= f.password_field :password, autocomplete: "new-password", class: "form-control", id: 'field_2' %>        
             
             <% if devise_mapping.rememberable? %>
               <div class="field">
