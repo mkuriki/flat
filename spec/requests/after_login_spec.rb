@@ -5,7 +5,7 @@ RSpec.describe 'ユーザーログイン後のテスト', type: :system do
   let!(:other_user) { create(:user)}
   let!(:post) { create(:post, user: user) }
   let!(:other_post) { create(:post, user: other_user) }
-
+  
   before do
     visit new_user_session_path
     fill_in 'user[email]', with: user.email
@@ -16,6 +16,13 @@ RSpec.describe 'ユーザーログイン後のテスト', type: :system do
   describe 'ヘッダーのテスト: ログインしている場合' do
     context 'リンクの内容を確認' do
       subject { current_path }
+      
+      # it 'postsを押すと、投稿一覧画面に遷移する' do
+      #   posts_link = find_all('a')[1].native.inner_text
+      #   posts_link = posts_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+      #   click_link posts_link
+      #   is_expected.to eq '/posts'
+      # end
 
       # it 'マイページを押すと、自分のユーザ詳細画面に遷移する' do
       #   mypage_link = find_all('a')[2].native.inner_text
@@ -24,5 +31,52 @@ RSpec.describe 'ユーザーログイン後のテスト', type: :system do
       #   is_expected.to eq '/public/users/' + user.id.to_s
       # end
     end
+  end
+  
+  describe '投稿一覧画面のテスト' do
+    before do
+      visit  public_posts_path
+    end
+    
+    context '表示内容の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/public/posts'
+      end
+      it '投稿するボタンが表示されているか' do
+        expect(page).to have_selector('a', text: '投稿する')
+	    end
+    #   it '投稿するボタンのリンク先が正しい' do
+    #     expect(page).to have_link post.id.to_s, href: public_post_path(post.id.to_s)
+	   # end
+      it '自分と他人の画像のリンク先が正しい' do
+        expect(page).to have_link '', href: public_user_path(post.user)
+        expect(page).to have_link '', href: public_user_path(other_post.user)
+      end
+      it '自分と他人の投稿画像のリンク先が正しい' do
+        expect(page).to have_link '', href: public_post_path(post.user.id.to_s)
+        expect(page).to have_link '', href: public_post_path(other_post.user.id.to_s)
+      end
+      it '自分の投稿と他人の投稿のタイトル(title)のリンク先がそれぞれ正しい' do
+        expect(page).to have_link post.title, href: public_post_path(post)
+      end
+      it '自分と他人のニックネーム(name)のリンク先がそれぞれ正しい' do
+        expect(page).to have_link user.name, href: public_user_path(user)
+      end
+      it '自分の投稿と他人の投稿の本文(body)が表示される' do
+        expect(page).to have_content post.body
+        expect(page).to have_content other_post.body
+      end
+    end
+    
+    # context '投稿成功のテスト' do
+    #   before do
+    #     fill_in 'post[title]', with: Faker::Lorem.characters(number: 5)
+    #     fill_in 'post[body]', with: Faker::Lorem.characters(number: 20)
+    #   end
+      
+    #   it '自分の新しい投稿が正しく保存される' do
+    #     expect { click_button '投稿する' }.to change(user.books, :count).by(1)
+    #   end
+    # end
   end
 end

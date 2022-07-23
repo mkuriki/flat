@@ -17,6 +17,9 @@ RSpec.describe "ユーザログイン前のテスト", type: :system do
         it '「投稿をチェック」リンクの内容が正しい' do
           expect(page).to have_link '投稿をチェック', href: public_posts_path
         end
+        it 'トップ画面(root_path)に「Make Your Day !!」が表示されているか' do
+          expect(page).to have_content 'Make Your Day !!'
+        end
       end
     end
     
