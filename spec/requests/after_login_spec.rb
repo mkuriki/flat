@@ -68,15 +68,22 @@ RSpec.describe 'ユーザーログイン後のテスト', type: :system do
       end
     end
     
-    # context '投稿成功のテスト' do
-    #   before do
-    #     fill_in 'post[title]', with: Faker::Lorem.characters(number: 5)
-    #     fill_in 'post[body]', with: Faker::Lorem.characters(number: 20)
-    #   end
+    describe '投稿詳細画面のテスト' do
+      before do
+        visit new_public_post_path
+      end
       
-    #   it '自分の新しい投稿が正しく保存される' do
-    #     expect { click_button '投稿する' }.to change(user.books, :count).by(1)
-    #   end
-    # end
+      context '投稿成功のテスト' do
+        before do
+          fill_in 'post[title]', with: Faker::Lorem.characters(number: 5)
+          fill_in 'post[body]', with: Faker::Lorem.characters(number: 20)
+          fill_in date {'2020/10/01'}
+         end
+         
+        it '自分の新しい投稿が正しく保存される' do
+          expect { click_button '投稿する' }.to change(user.posts, :count).by(1)
+        end
+      end
+    end
   end
 end
