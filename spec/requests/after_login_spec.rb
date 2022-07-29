@@ -68,11 +68,29 @@ RSpec.describe 'ユーザーログイン後のテスト', type: :system do
       end
     end
     
-    describe '投稿詳細画面のテスト' do
+    describe '新規投稿画面のテスト' do
       before do
         visit new_public_post_path
       end
       
+      context '表示内容の確認' do
+      #   it '「投稿フォーム」と表示される' do
+      #     expect(page).to have_content '投稿フォーム'
+      #   end 
+      #   it 'titleフォームが表示される' do
+      #     expect(page).to have_field 'post[title]'
+      #   end        
+      #   it 'titleフォームに値が入っていない' do
+      #     expect(find_field('post[title]').text).to be_blank
+      #   end
+      #   it 'bodyフォームが表示される' do
+      #     expect(page).to have_field 'book[body]'
+      #   end        
+      #   it 'bodyフォームに値が入っていない' do
+      #     expect(find_field('post[body]').text).to be_blank
+      #   end
+      end
+    
       context '投稿成功のテスト' do
         before do
           fill_in 'post[title]', with: Faker::Lorem.characters(number: 5)
@@ -80,9 +98,13 @@ RSpec.describe 'ユーザーログイン後のテスト', type: :system do
           fill_in date {'2020/10/01'}
          end
          
-        it '自分の新しい投稿が正しく保存される' do
-          expect { click_button '投稿する' }.to change(user.posts, :count).by(1)
-        end
+        # it '自分の新しい投稿が正しく保存される' do
+        #   expect { click_button '投稿する' }.to change(user.posts, :count).by(1)
+        # end
+        # it 'リダイレクト先が、保存できた投稿の詳細画面になっている' do
+        # click_button '投稿する'
+        # expect (current_path).to eq '/public/posts' + Post.last.id.to_s
+        # end
       end
     end
   end
