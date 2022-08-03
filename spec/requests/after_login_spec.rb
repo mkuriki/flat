@@ -5,6 +5,7 @@ RSpec.describe 'ユーザーログイン後のテスト', type: :system do
   let!(:other_user) { create(:user)}
   let!(:post) { create(:post, user: user) }
   let!(:other_post) { create(:post, user: other_user) }
+  let!(:group) { create(:group, post: post) }
   
   before do
     visit new_user_session_path
@@ -84,7 +85,7 @@ RSpec.describe 'ユーザーログイン後のテスト', type: :system do
       #     expect(find_field('post[title]').text).to be_blank
       #   end
       #   it 'bodyフォームが表示される' do
-      #     expect(page).to have_field 'book[body]'
+      #     expect(page).to have_field 'post[body]'
       #   end        
       #   it 'bodyフォームに値が入っていない' do
       #     expect(find_field('post[body]').text).to be_blank
@@ -105,6 +106,43 @@ RSpec.describe 'ユーザーログイン後のテスト', type: :system do
         # click_button '投稿する'
         # expect (current_path).to eq '/public/posts' + Post.last.id.to_s
         # end
+      end
+    end
+  end
+  
+  describe  '自分の投稿詳細のテスト' do
+    before do
+      visit public_post_path(post)
+    end
+    
+    context '表示内容の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq 'public/posts/' + post.id.to_s
+      end
+      it '自分（name）のリンク先がそれぞれ正しい' do
+        expect(page).to have_link user.name, href: public_user_path(user)
+      end
+      it '自分の投稿の本文(body)が表示される' do
+        expect(page).to have_content post.body
+      end
+      it '自分の投稿のタイトル(title)が表示される' do
+        expect(page).to have_content post.title
+      end
+      it 'グループ名（name）のリンク先がそれぞれ正しい' do
+        expect(page).to have_link group.name, href: public_post_group_path(post, group)
+      end
+      it '投稿の編集リンクが表示される' do
+        expect(page).to have_link '投稿編集', href: edit_public_post_path(post)
+      end
+      it '投稿の削除リンクが表示される' do
+        expect(page).to have_link '投稿削除', href: public_post_path(post)
+      end
+    end
+    
+    context '編集リンクのテスト' do
+      it '編集画面に遷移する' do
+        click_link '投稿編集'
+        expect(current_path).to eq '/posts/' + post.id.to_s + '/edit'
       end
     end
   end
