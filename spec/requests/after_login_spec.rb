@@ -146,4 +146,34 @@ RSpec.describe 'ユーザーログイン後のテスト', type: :system do
   #     end
   #   end
   # end
+  
+  describe '自分の投稿編集画面のテスト' do
+    before do
+      visit edit_public_post_path(post)
+    end
+    
+    context '表示の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq 'public/posts/' + post.id.to_s + '/edit'
+      end
+      it '「投稿編集」と表示される' do
+        expect(page).to have_content '投稿編集'
+      end
+      it 'title編集フォームが表示される' do
+        expect(page).to have_field 'post[title]', with: post.title
+      end
+      it 'body編集フォームが表示される' do
+        expect(page).to have_field 'post[body]', with: post.body
+      end
+      it '更新するボタンが表示される' do
+        expect(page).to have_button '更新する'
+      end
+      it '投稿一覧へリンクが表示される' do
+        expect(page).to have_link '投稿一覧へ', href: public_posts_path
+      end
+      it '戻るリンクが表示される' do
+        expect(page).to have_link '戻る', href: public_post_path(post)
+      end
+    end
+  end
 end
